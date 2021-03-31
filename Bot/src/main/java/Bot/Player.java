@@ -12,7 +12,7 @@ public class Player {
 		return position;
 	}
 	
-	void changeMoney(int diff) { //Adds or subtracts given amount from player's money
+	void addMoney(int diff) { //Adds or subtracts given amount from player's money
 		money += diff;
 	}
 	void setMoney(int cash) {
