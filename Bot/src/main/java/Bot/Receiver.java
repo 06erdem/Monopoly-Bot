@@ -7,11 +7,14 @@ public class Receiver extends ListenerAdapter {
 	
 	@Override
 	public void onMessageReceived(MessageReceivedEvent e) {
-		if(e.getMessage().getContentRaw().equals("hi")) {
+		if(e.getMessage().getContentRaw().toLowerCase().equals("hi")) {
 			e.getChannel().sendMessage("what's up mate").queue();
 		}
-		if(e.getMessage().getContentRaw().equals("cool")) {
-			e.getChannel().sendMessage("ikr!").queue();
+		if(e.getMessage().getContentRaw().toLowerCase().equals("!help")) {
+			e.getChannel().sendMessage("").queue();
+		}
+		if(e.getMessage().getContentRaw().toLowerCase().contains("")) {
+			e.getChannel().sendMessage("").queue();
 		}
 	}
 	
