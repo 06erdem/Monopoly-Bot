@@ -5,6 +5,16 @@ public class Player {
 	int position; //position on board
 	int money; //money
 	
+	public Player(){
+		position = 0;
+		money = 1500;
+	}
+	
+	public Player(int cash, int pos){
+		position = pos;
+		money = cash;
+	}
+	
 	void setPosition(int pos) { //Set position on board
 		position = pos;
 	}
