@@ -22,13 +22,13 @@ public class Player {
 		return position;
 	}
 	
-	void addMoney(int diff) { //Adds given amount from player's money
+	void addMoney(int diff) { //Adds or subtracts given amount from player's money
 		money += diff;
 	}
 	
-	void subtractMoney(int diff){ //subtracts money from players account
-		money -= diff;
-	}
+	//void subtractMoney(int diff){ //subtracts money from players account
+		//money -= diff;
+	//}
 	
 	void setMoney(int cash) {
 		money = cash;
