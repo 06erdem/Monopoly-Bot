@@ -25,15 +25,27 @@ public class Player {
 	void addMoney(int diff) { //Adds or subtracts given amount from player's money
 		money += diff;
 	}
-	
-	//void subtractMoney(int diff){ //subtracts money from players account
-		//money -= diff;
-	//}
-	
+
 	void setMoney(int cash) {
 		money = cash;
 	}
 	int getMoney() {
 		return money;
+	}
+	
+	//****Functions for tiles****//
+	void buyProperty(Tiles tile) {
+		tile.buyProperty();
+		addMoney(-tile.getValue());
+	}
+	
+	void rentProperty(Tiles tile) {
+		addMoney(-tile.getRent());
+	}
+	void payTax(Tiles tile) {
+		addMoney(-tile.getTax());
+	}
+	void payJail() {
+		addMoney(-200);
 	}
 }
