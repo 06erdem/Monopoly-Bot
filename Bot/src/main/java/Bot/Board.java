@@ -1,11 +1,15 @@
 package Bot;
 
 public class Board {
-	Tiles[] tiles = new Tiles[41];
-	int[] playerList = new int [4];
+	Tiles[] tiles;
+	int[] playerList;
 	
 	public Board(){
-		tiles
+		tiles = new Tiles[41];
+		playerList = new int[4];
+	}
+	
+	public Board(Tiles
 	int[] getPlayerList(){
 		return playerList;
 	}
