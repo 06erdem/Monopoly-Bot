@@ -2,11 +2,11 @@ package Bot;
 
 public class Board {
 	Tiles[] tiles; //array of tiles
-	int[] playerList; //list of players currently playing the game
+	Player[] playerList; //list of players currently playing the game
 	
 	public Board(){
 		tiles = new Tiles[41];
-		playerList = new int[4];
+		playerList = new Player[4];
 	}
 	
 	public Board(Tiles[] tileList, int[] players){
