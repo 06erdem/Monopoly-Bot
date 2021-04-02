@@ -9,7 +9,11 @@ public class Board {
 		playerList = new int[4];
 	}
 	
-	public Board(Tiles
+	public Board(Tiles[] tileList, int[] players){
+		tiles = tileList;
+		playerList = players;
+	}
+	
 	int[] getPlayerList(){
 		return playerList;
 	}
