@@ -6,6 +6,13 @@ public class Tiles_Jail extends Tiles {
 		// TODO Auto-generated constructor stub
 		name = "Jail! No action";
 		type = 2;
+		emoji = ":passport_control:";
+	}
+	public Tiles_Jail(String emoji) {
+		// TODO Auto-generated constructor stub
+		name = "Jail! No action";
+		type = 2;
+		this.emoji = emoji;
 	}
 	int getType() {
 		return type;
