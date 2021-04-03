@@ -34,6 +34,7 @@ public class Player {
 	}
 	
 	//****Functions for tiles****//
+	/*
 	void buyProperty(Tiles tile) {
 		tile.buyProperty();
 		addMoney(-tile.getValue());
@@ -47,5 +48,5 @@ public class Player {
 	}
 	void payJail() {
 		addMoney(-200);
-	}
+	}*/
 }
