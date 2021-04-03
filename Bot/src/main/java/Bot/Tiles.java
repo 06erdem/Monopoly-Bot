@@ -1,5 +1,5 @@
 package Bot;
-
+/* Parent class for all tiles of the board */
 public class Tiles {
         
         int price; //price of tile
@@ -34,7 +34,11 @@ public class Tiles {
         int getTax(){ //function that subtracts bank tax
                 return tax;
         }
-
+	/* contain the coordinate of the tile on the board */
+	private int[] coordinate;
+	
+	public Tiles() {		
+	}
   
       
       
