@@ -9,16 +9,16 @@ public class Board {
 		playerList = new Player[4];
 	}
 	
-	public Board(Tiles[] tileList, int[] players){
+	public Board(Tiles[] tileList, Player[] players){
 		tiles = tileList;
 		playerList = players;
 	}
 	
-	int[] getPlayerList(){ //returns the list of players
+	Player[] getPlayerList(){ //returns the list of players
 		return playerList;
 	}
 	
-	void setPlayerList(int[] players){ //set the list of players
+	void setPlayerList(Player[] players){ //set the list of players
 		playerList = players;
 	}
 		
@@ -31,8 +31,8 @@ public class Board {
 	}
 	
 	
-	void printBoard() {
-		
+	String printBoard() {
+		return "";
 	}
 	
 }

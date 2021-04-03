@@ -19,23 +19,21 @@ public class Tiles {
         }
   
         void buyProperty(){ //function to buy the property if the tile is unowned
-                owned = true;
-                player.addMoney(-(price));
+            owned = true;
         }
-        
-        void rentProperty(){ //function that subtracts rent from players money if the tile is owned by someone else
-                player.addMoney(-(rent));
+        void freeProperty() {
+        	owned = false;
+        }
+        int getValue() {
+        	return price;
+        }
+        int getRent(){ //function that subtracts rent from players money if the tile is owned by someone else
+                return rent;
         }
       
-        void payBankTax(){ //function that subtracts bank tax
-                player.addMoney(-(tax));
-        }
-        
-        
-        void goToJail(){ //function that subtracts 200 when going to jail, might have to change player position from here?
-                player.addMoney(-200);
-        }
-  
+        int getTax(){ //function that subtracts bank tax
+                return tax;
+        }  
       
       
 }
