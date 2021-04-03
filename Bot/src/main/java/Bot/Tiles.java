@@ -33,7 +33,9 @@ public class Tiles {
       
         int getTax(){ //function that subtracts bank tax
                 return tax;
-        }  
+        }
+
+  
       
       
 }

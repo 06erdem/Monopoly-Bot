@@ -7,6 +7,8 @@ public class Board {
 	public Board(){
 		tiles = new Tiles[41];
 		playerList = new Player[4];
+
+		}
 	}
 	
 	public Board(Tiles[] tileList, Player[] players){
