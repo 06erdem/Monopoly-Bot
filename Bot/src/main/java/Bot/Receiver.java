@@ -21,6 +21,9 @@ public class Receiver extends ListenerAdapter {
 		if(e.getMessage().getContentRaw().toLowerCase().contains("printboard")) {
 			e.getChannel().sendMessage(board_temp.printBoard()).queue();
 		}
+		if(e.getMessage().getContentRaw().toLowerCase().contains("!delete")) {
+			e.getChannel().purgeMessages(e.getChannel().getHistory().retrievePast(50).complete());
+		}
 	}
 	
 }
