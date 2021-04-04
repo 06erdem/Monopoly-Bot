@@ -13,6 +13,7 @@ public class Board {
 	public Board(Tiles[] tileList, Player[] players){
 		tiles = tileList;
 		playerList = players;
+		buildBoard();
 	}
 	void buildBoard() {
 		for(int i = 0; i < 40; i++) {
@@ -121,7 +122,28 @@ public class Board {
 	
 	
 	String printBoard() {
-		return "";
+		String strBoard = "";
+		for(int i = 20; i < 31; i++)
+			strBoard += tiles[i].getEmoji();
+		strBoard += "\n";
+		int L = 19;
+		for(int R = 31; R < 40; R++) {
+			strBoard += tiles[L].getEmoji();
+			strBoard += printSpaces();
+			strBoard += tiles[R].getEmoji();
+			L--;
+		}
+		for(int i = 10; i >= 0; i++)
+			strBoard += tiles[i].getEmoji();
+		
+		return strBoard;
+	}
+	String printSpaces() {
+		String space = "";
+		for(int i = 0; i < 10; i++) {
+			space += " ";
+		}
+		return space;
 	}
 	
 }

@@ -14,7 +14,7 @@ public class Receiver extends ListenerAdapter {
 		}
 		/*for testing purpose, should be deleted afterwards.*/
 		Board board_temp = new Board();
-		if(e.getMessage().getContentRaw().toLowerCase().contains("printboard")) {
+		if(content.toLowerCase().contains("printboard")) {
 			e.getChannel().sendMessage(board_temp.printBoard()).queue();
 		}
 
