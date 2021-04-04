@@ -59,8 +59,8 @@ public class Board {
 				tiles[i] = new Tiles_Property(180, 70, "Tennesse Avenue", ":house_with_garden:");
 			else if(i==19)
 				tiles[i] = new Tiles_Property(200, 80, "New York Avenue",":house_with_garden:");
-			/*else if(i==20)
-				tiles[i] = new Tiles_Parking();*/
+			else if(i==20)
+				tiles[i] = new Tiles("Free Parking",0, ":parking:");
 			else if(i==21)
 				tiles[i] = new Tiles_Property(220, 90, "Kentucky Avenue", ":homes:");
 			/*else if(i==22)
