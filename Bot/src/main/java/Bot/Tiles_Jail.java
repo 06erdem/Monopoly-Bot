@@ -14,9 +14,7 @@ public class Tiles_Jail extends Tiles {
 		type = 2;
 		this.emoji = emoji;
 	}
-	int getType() {
-		return type;
-	}
+
 	void setName(String name) {
 		this.name = name;
 	}

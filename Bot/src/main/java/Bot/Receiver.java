@@ -14,10 +14,18 @@ public class Receiver extends ListenerAdapter {
 		}
 		/*for testing purpose, should be deleted afterwards.*/
 		Board board_temp = new Board();
-		if(content.toLowerCase().contains("printboard")) {
+		if(content.toLowerCase().equals("printboard")) {
 			e.getChannel().sendMessage(board_temp.printBoard()).queue();
 		}
-
+		
+		//***This is how we can make the board and output look pretty. There is a bug with spacing when printing the board***//
+		if(content.toLowerCase().equals("!printboard")) {
+			EmbedBuilder embed = new EmbedBuilder();
+			embed.setTitle(":pickup_truck: player's turn!");
+			embed.setDescription(board_temp.printBoard());
+			embed.setFooter("Instruction can be here:Type 1 to buy\nType 2 to mortgage\n");
+			e.getChannel().sendMessage(embed.build()).queue();
+		}
 		if(content.contains("!delete")) {
 			e.getChannel().purgeMessages(e.getChannel().getHistory().retrievePast(50).complete());
 		}

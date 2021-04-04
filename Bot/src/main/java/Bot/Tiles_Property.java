@@ -41,9 +41,7 @@ public class Tiles_Property extends Tiles  {
 	boolean isMortgaged() {
 		return isMortgaged;
 	}
-	int getType() {
-		return type;
-	}
+
 	void setName(String name) {
 		this.name = name;
 	}
