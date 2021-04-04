@@ -139,10 +139,11 @@ public class Board {
 		
 		return strBoard;
 	}
+
 	String printSpaces() {
 		String space = "";
-		for(int i = 0; i < 55; i++) {
-			space += " ";
+		for(int i = 0; i < 9; i++) {
+			space += "⬛";
 		}
 		return space;
 	}
