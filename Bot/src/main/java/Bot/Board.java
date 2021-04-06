@@ -9,6 +9,7 @@ public class Board {
 		tiles = new Tiles[41];
 		playerList = new Player[4];
 
+<<<<<<< HEAD
 		//tiles[0] = new Tiles(); GO tile
 		tiles[1] = new Tiles(60, "Mediterranean Avenue", 1, [2, 4, 10, 30, 90, 160, 250]);
 		//tiles[2] = new Tiles(); Community Chest
@@ -49,18 +50,20 @@ public class Board {
 		tiles[37] = new Tiles(350, "Park Place", 37, [35, 70, 175, 500, 1100, 1300, 1500]);
 		//tiles[38] = new Tiles(); Luxury Tax
 		tiles[39] = new Tiles(400, "Boardwalk", 39, [50, 100, 200, 600, 1400, 1700, 2000]);
+=======
+>>>>>>> origin/main
 	}
 	
-	public Board(Tiles[] tileList, int[] players){
+	public Board(Tiles[] tileList, Player[] players){
 		tiles = tileList;
 		playerList = players;
 	}
 	
-	int[] getPlayerList(){ //returns the list of players
+	Player[] getPlayerList(){ //returns the list of players
 		return playerList;
 	}
 	
-	void setPlayerList(int[] players){ //set the list of players
+	void setPlayerList(Player[] players){ //set the list of players
 		playerList = players;
 	}
 		
@@ -73,8 +76,8 @@ public class Board {
 	}
 	
 	
-	void printBoard() {
-		
+	String printBoard() {
+		return "";
 	}
 	
 }
