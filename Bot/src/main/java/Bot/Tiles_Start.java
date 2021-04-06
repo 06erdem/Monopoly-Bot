@@ -6,10 +6,9 @@ public class Tiles_Start extends Tiles {
 		// TODO Auto-generated constructor stub
 		type = 0;
 		name = "Collect $200 as you pass!";
+		emoji = ":green_circle:";
 	}
-	int getType() {
-		return type;
-	}
+
 	int getReward() {
 		return 200;
 	}
