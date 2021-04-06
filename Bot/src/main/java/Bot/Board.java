@@ -3,7 +3,10 @@ package Bot;
 public class Board {
 	Tiles[] tiles; //array of tiles
 	Player[] playerList; //list of players currently playing the game
+	int numPlayers;
+	int currPlayer;
 	
+	//public Tiles(int prices, String names, int index, int[6] rents){
 	public Board(){
 		tiles = new Tiles[40];
 		playerList = new Player[4];
@@ -13,6 +16,8 @@ public class Board {
 	public Board(Tiles[] tileList, Player[] players){
 		tiles = tileList;
 		playerList = players;
+		numPlayers = 0;
+		currPlayer = 0;
 		buildBoard();
 	}
 	void buildBoard() {
@@ -121,6 +126,7 @@ public class Board {
 	}
 	
 	
+
 	String printBoard() {
 		String strBoard = "";
 		for(int i = 20; i < 31; i++)
@@ -138,6 +144,15 @@ public class Board {
 			strBoard += tiles[j].getEmoji();
 		
 		return strBoard;
+	}
+
+	String rollDice(){
+		int dice1;
+    	int dice2;
+		dice1 = (int)(Math.random()*6+1);
+		dice2 = (int)(Math.random()*6+1);
+		String rollOutput =  dice1 + " " + dice2;
+		return rollOutput;
 	}
 
 	String printSpaces() {
