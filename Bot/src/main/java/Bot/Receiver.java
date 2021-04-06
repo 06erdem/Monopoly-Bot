@@ -10,48 +10,71 @@ public class Receiver extends ListenerAdapter {
 	public void onMessageReceived(MessageReceivedEvent e) {
 		int playCommand = 0;
 		int startCommand = 0;
+		int[] playersAvailable = new int[4];
 		String content = e.getMessage().getContentRaw().toLowerCase();
 		if(content.equals("hi")) {
 			e.getChannel().sendMessage("what's up mate").queue();
 		}
 		/*for testing purpose, should be deleted afterwards.*/
-		Board board_temp = new Board();
-		if(content.toLowerCase().equals("printboard")) {
-			e.getChannel().sendMessage(board_temp.printBoard()).queue();
-		}
-		
-		//***This is how we can make the board and output look pretty.***//
-		if(content.toLowerCase().equals("!printboard")) {
-			EmbedBuilder embed = new EmbedBuilder();
-			embed.setTitle(":pickup_truck: player's turn!");
-			embed.setDescription(board_temp.printBoard());
-			embed.setFooter("Instruction can be here:\nType 1 to buy\nType 2 to mortgage\n");
-			e.getChannel().sendMessage(embed.build()).queue();
-		}
+		//Board board_temp = new Board();
 		if(content.contains("!delete")) {
 			e.getChannel().purgeMessages(e.getChannel().getHistory().retrievePast(50).complete());
 		}
 		if(content.equals("!play")) {
+			Board board_temp = new Board();
 			EmbedBuilder embed = new EmbedBuilder();
 			embed.setTitle("Welcome to Discord Monopoly!");
 			embed.setDescription("Select your player emoji.\n1 :pickup_truck:    2 :race_car:    3 :bus:    4 :motorcycle:");
 			embed.setFooter("Type 1, 2, 3 or 4.\n2-4 Players required\nPlayers cannot choose the same emoji. Type '!start' when ready.");
 			e.getChannel().sendMessage(embed.build()).queue();
 			playCommand = 1;
+			playersAvailable = [0, 0, 0, 0];
 			//e.getMessage().addReaction("U+2705").queue();
 		}
 		if(playCommand){
 			if(content.equals("1")) {
-				//Add Player function
+				if(!playersAvailable[0]){
+					//Add Player function
+					board_temp.numPlayers++; //Temp stub to allow testing
+					playersAvailable[0] = 1;
+				}
+				else{
+					embed.setTitle("Player 1 Token is already taken");
+					e.getChannel().sendMessage(embed.build()).queue();
+				}
 			}
 			if(content.equals("2")) {
-				//Add Player function
+				if(!playersAvailable[1]){
+					//Add Player function
+					board_temp.numPlayers++; //Temp stub to allow testing
+					playersAvailable[1] = 1;
+				}
+				else{
+					embed.setTitle("Player 2 Token is already taken");
+					e.getChannel().sendMessage(embed.build()).queue();
+				}
 			}
 			if(content.equals("3")) {
-				//Add Player function
+				if(!playersAvailable[2]){
+					//Add Player function
+					board_temp.numPlayers++; //Temp stub to allow testing
+					playersAvailable[2] = 1;
+				}
+				else{
+					embed.setTitle("Player 3 Token is already taken");
+					e.getChannel().sendMessage(embed.build()).queue();
+				}
 			}
 			if(content.equals("4")) {
-				//Add Player function
+				if(!playersAvailable[3]){
+					//Add Player function
+					board_temp.numPlayers++; //Temp stub to allow testing
+					playersAvailable[3] = 1;
+				}
+				else{
+					embed.setTitle("Player 4 Token is already taken");
+					e.getChannel().sendMessage(embed.build()).queue();
+				}
 			}
 			if(content.equals("!start")) {
 				EmbedBuilder embed = new EmbedBuilder();
@@ -72,7 +95,7 @@ public class Receiver extends ListenerAdapter {
 				}
 			}
 		}
-		//if(startCommand){
+		if(startCommand){
 			if(content.equals("!roll")){
 				String rollOutput = board_temp.rollDice();
 				String rollArray[] = rollOutput.split(" ", 2)
@@ -85,7 +108,19 @@ public class Receiver extends ListenerAdapter {
 				}
 				e.getChannel().sendMessage(embed.build()).queue();
 			}
-		//}
+			if(content.toLowerCase().equals("printboard")) {
+				e.getChannel().sendMessage(board_temp.printBoard()).queue();
+			}
+			
+			//***This is how we can make the board and output look pretty.***//
+			if(content.toLowerCase().equals("!printboard")) {
+				EmbedBuilder embed = new EmbedBuilder();
+				embed.setTitle(":pickup_truck: player's turn!");
+				embed.setDescription(board_temp.printBoard());
+				embed.setFooter("Instruction can be here:\nType 1 to buy\nType 2 to mortgage\n");
+				e.getChannel().sendMessage(embed.build()).queue();
+			}
+		}
 	}
 	
 }
