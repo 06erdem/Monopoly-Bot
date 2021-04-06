@@ -8,6 +8,8 @@ public class Receiver extends ListenerAdapter {
 	
 	@Override
 	public void onMessageReceived(MessageReceivedEvent e) {
+		int playCommand = 0;
+		int startCommand = 0;
 		String content = e.getMessage().getContentRaw().toLowerCase();
 		if(content.equals("hi")) {
 			e.getChannel().sendMessage("what's up mate").queue();
@@ -35,20 +37,55 @@ public class Receiver extends ListenerAdapter {
 			embed.setDescription("Select your player emoji.\n1 :pickup_truck:    2 :race_car:    3 :bus:    4 :motorcycle:");
 			embed.setFooter("Type 1, 2, 3 or 4.\n2-4 Players required\nPlayers cannot choose the same emoji. Type '!start' when ready.");
 			e.getChannel().sendMessage(embed.build()).queue();
+			playCommand = 1;
 			//e.getMessage().addReaction("U+2705").queue();
 		}
-		if(content.equals("!roll")){
-			String rollOutput = board_temp.rollDice();
-			String rollArray[] = rollOutput.split(" ", 2)
-			int sum = Integer.parseInt(rollArray[0]) + Integer.parseInt(rollArray[1]);
-			EmbedBuilder embed = new EmbedBuilder();
-			embed.setTitle("Rolled Dice!");
-			embed.setDescription("Dice 1: " + rollArray[0] + "\nDice 2: " + rollArray[1] + "\nTotal: " + sum);
-			if(rollArray[0].equals(rollArray[1])){
-				embed.setFooter("Doubles! Roll Again!");
+		if(playCommand){
+			if(content.equals("1")) {
+				//Add Player function
 			}
-			e.getChannel().sendMessage(embed.build()).queue();
+			if(content.equals("2")) {
+				//Add Player function
+			}
+			if(content.equals("3")) {
+				//Add Player function
+			}
+			if(content.equals("4")) {
+				//Add Player function
+			}
+			if(content.equals("!start")) {
+				EmbedBuilder embed = new EmbedBuilder();
+				if(board_temp.numPlayers <= 1){
+					embed.setTitle("Not Enough Players");
+					embed.setDescription("Select your player emoji.\n1 :pickup_truck:    2 :race_car:    3 :bus:    4 :motorcycle:");
+					embed.setFooter("Type 1, 2, 3 or 4.\n2-4 Players required\nPlayers cannot choose the same emoji. Type '!start' when ready.");
+					e.getChannel().sendMessage(embed.build()).queue();
+				}
+				else{
+					board_temp.currPlayer = 1;
+					embed.setTitle("Let the Game Begin!");
+					embed.setDescription("");
+					embed.setFooter("");
+					e.getChannel().sendMessage(embed.build()).queue();
+					playCommand = 0;
+					startCommand = 1;
+				}
+			}
 		}
+		//if(startCommand){
+			if(content.equals("!roll")){
+				String rollOutput = board_temp.rollDice();
+				String rollArray[] = rollOutput.split(" ", 2)
+				int sum = Integer.parseInt(rollArray[0]) + Integer.parseInt(rollArray[1]);
+				EmbedBuilder embed = new EmbedBuilder();
+				embed.setTitle("Rolled Dice!");
+				embed.setDescription("Dice 1: " + rollArray[0] + "\nDice 2: " + rollArray[1] + "\nTotal: " + sum);
+				if(rollArray[0].equals(rollArray[1])){
+					embed.setFooter("Doubles! Roll Again!");
+				}
+				e.getChannel().sendMessage(embed.build()).queue();
+			}
+		//}
 	}
 	
 }

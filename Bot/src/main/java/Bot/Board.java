@@ -3,6 +3,8 @@ package Bot;
 public class Board {
 	Tiles[] tiles; //array of tiles
 	Player[] playerList; //list of players currently playing the game
+	int numPlayers;
+	int currPlayer;
 	
 	//public Tiles(int prices, String names, int index, int[6] rents){
 	public Board(){
@@ -14,6 +16,8 @@ public class Board {
 	public Board(Tiles[] tileList, Player[] players){
 		tiles = tileList;
 		playerList = players;
+		numPlayers = 0;
+		currPlayer = 0;
 		buildBoard();
 	}
 	void buildBoard() {
@@ -122,6 +126,7 @@ public class Board {
 	}
 	
 	
+
 	String printBoard() {
 		String strBoard = "";
 		for(int i = 20; i < 31; i++)
