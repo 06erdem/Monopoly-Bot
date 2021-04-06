@@ -37,6 +37,18 @@ public class Receiver extends ListenerAdapter {
 			e.getChannel().sendMessage(embed.build()).queue();
 			//e.getMessage().addReaction("U+2705").queue();
 		}
+		if(content.equals("!roll")){
+			String rollOutput = board_temp.rollDice();
+			String rollArray[] = rollOutput.split(" ", 2)
+			int sum = Integer.parseInt(rollArray[0]) + Integer.parseInt(rollArray[1]);
+			EmbedBuilder embed = new EmbedBuilder();
+			embed.setTitle("Rolled Dice!");
+			embed.setDescription("Dice 1: " + rollArray[0] + "\nDice 2: " + rollArray[1] + "\nTotal: " + sum);
+			if(rollArray[0].equals(rollArray[1])){
+				embed.setFooter("Doubles! Roll Again!");
+			}
+			e.getChannel().sendMessage(embed.build()).queue();
+		}
 	}
 	
 }

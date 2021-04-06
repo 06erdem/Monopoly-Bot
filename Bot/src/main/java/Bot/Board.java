@@ -141,6 +141,15 @@ public class Board {
 		return strBoard;
 	}
 
+	String rollDice(){
+		int dice1;
+    	int dice2;
+		dice1 = (int)(Math.random()*6+1);
+		dice2 = (int)(Math.random()*6+1);
+		String rollOutput =  dice1 + " " + dice2;
+		return rollOutput;
+	}
+
 	String printSpaces() {
 		String space = "";
 		for(int i = 0; i < 9; i++) {
