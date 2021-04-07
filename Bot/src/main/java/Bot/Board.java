@@ -86,7 +86,7 @@ public class Board {
 				tiles[i] = new Tiles_Property(280, 120, "Marvin Gardens", ":homes:");
 			else if(i==30) //Jail WITH action
 				//TO-DO: Action
-				tiles[i] = new Tiles_Jail();
+				tiles[i] = new Tiles_Jail(":passport_control:");
 			else if(i==31)
 				tiles[i] = new Tiles_Property(300, 130, "Pacific Avenue", ":classical_building:");
 			else if(i==32)
