@@ -20,6 +20,7 @@ public class Board {
 		currPlayer = 0;
 		buildBoard();
 	}
+
 	void buildBoard() {
 		for(int i = 0; i < 40; i++) {
 			if(i==0)
@@ -124,8 +125,28 @@ public class Board {
 	void setTiles(Tiles[] tileList){ //set the tiles used for the board
 		tiles = tileList;
 	}
+
+	int getNumPlayers(){
+		return numPlayers;
+	}
+
+	void setNumPlayers(int newNumPlayers){
+		numPlayers = newNumPlayers;
+	}
+
+	int getCurrPlayer(){
+		return currPlayer;
+	}
+
+	void setCurrPlayer(int newCurrPlayer){
+		currPlayer = newCurrPlayer;
+	}
 	
-	
+	void addPlayer(long playerId, String emoji){
+		Player newPlayer = new Player(playerId, emoji);
+		playerList[numPlayers] = newPlayer;
+		numPlayers++;
+	}
 
 	String printBoard() {
 		String strBoard = "";
