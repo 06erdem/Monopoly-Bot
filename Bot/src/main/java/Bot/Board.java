@@ -181,6 +181,16 @@ public class Board {
    int sum = dice1 + dice2;
    int index = playerID -1;
    Player player = playerList[index];
+   if(player.inJail() == true){
+     if(dice1 == dice2){
+       player.inJail() == false;
+       return;
+     }
+     else{
+       player.payJail();
+       return;
+     }
+   }
    player.position = player.getPosition() + sum;
    if(player.position > 41){
      player.position -= 41;
@@ -191,7 +201,7 @@ public class Board {
    }
    //if player lands on property we want to give them an option to purchase
    //But how do we do this without user input for option to purchase
-   if(tiles[player.position).hasOwner == false){
+   if(tiles[player.position].hasOwner == false){
      player.addMoney(tiles[player.position].getRent());
    }
  }
