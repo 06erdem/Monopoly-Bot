@@ -34,8 +34,7 @@ public class Receiver extends ListenerAdapter {
 		if(playCommand){
 			if(content.equals("1")) {
 				if(!playersAvailable[0]){
-					//Add Player function
-					board_temp.numPlayers++; //Temp stub to allow testing
+					board_temp.addPlayer(event.getAuthor().getIdLong(), ":pickup_truck:");
 					playersAvailable[0] = 1;
 				}
 				else{
@@ -45,8 +44,7 @@ public class Receiver extends ListenerAdapter {
 			}
 			if(content.equals("2")) {
 				if(!playersAvailable[1]){
-					//Add Player function
-					board_temp.numPlayers++; //Temp stub to allow testing
+					board_temp.addPlayer(event.getAuthor().getIdLong(), ":race_car:");
 					playersAvailable[1] = 1;
 				}
 				else{
@@ -56,8 +54,7 @@ public class Receiver extends ListenerAdapter {
 			}
 			if(content.equals("3")) {
 				if(!playersAvailable[2]){
-					//Add Player function
-					board_temp.numPlayers++; //Temp stub to allow testing
+					board_temp.addPlayer(event.getAuthor().getIdLong(), ":bus:");
 					playersAvailable[2] = 1;
 				}
 				else{
@@ -67,8 +64,7 @@ public class Receiver extends ListenerAdapter {
 			}
 			if(content.equals("4")) {
 				if(!playersAvailable[3]){
-					//Add Player function
-					board_temp.numPlayers++; //Temp stub to allow testing
+					board_temp.addPlayer(event.getAuthor().getIdLong(), ":motorcycle:");
 					playersAvailable[3] = 1;
 				}
 				else{
@@ -78,14 +74,14 @@ public class Receiver extends ListenerAdapter {
 			}
 			if(content.equals("!start")) {
 				EmbedBuilder embed = new EmbedBuilder();
-				if(board_temp.numPlayers <= 1){
+				if(board_temp.getNumPlayers() <= 1){
 					embed.setTitle("Not Enough Players");
 					embed.setDescription("Select your player emoji.\n1 :pickup_truck:    2 :race_car:    3 :bus:    4 :motorcycle:");
 					embed.setFooter("Type 1, 2, 3 or 4.\n2-4 Players required\nPlayers cannot choose the same emoji. Type '!start' when ready.");
 					e.getChannel().sendMessage(embed.build()).queue();
 				}
 				else{
-					board_temp.currPlayer = 1;
+					board_temp.setCurrPlayer(0);
 					embed.setTitle("Let the Game Begin!");
 					embed.setDescription("");
 					embed.setFooter("");

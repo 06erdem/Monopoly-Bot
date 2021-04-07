@@ -4,15 +4,20 @@ public class Player {
 	
 	int position; //position on board
 	int money; //money
+	long playerId;
+	String playerEmoji;
 	
 	public Player(){
 		position = 0;
 		money = 1500;
+		emoji = "";
 	}
 	
-	public Player(int cash, int pos){
+	public Player(int pos, int cash, long id, String emoji){
 		position = pos;
 		money = cash;
+		playerId = id;
+		playerEmoji = emoji;
 	}
 	
 	void setPosition(int pos) { //Set position on board
@@ -31,6 +36,18 @@ public class Player {
 	}
 	int getMoney() {
 		return money;
+	}
+
+	void setId(long id){
+		playerId = id;
+	}
+
+	long getId(){
+		return playerId;
+	}
+
+	String getEmoji() {
+		return playerEmoji;
 	}
 	
 	//****Functions for tiles****//
