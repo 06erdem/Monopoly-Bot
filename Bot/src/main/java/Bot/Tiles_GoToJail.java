@@ -2,15 +2,12 @@ package Bot;
 
 public class Tiles_GoToJail extends Tiles {
   // TODO Auto-generated constructor stub
-  name = "Go To Jail!";
-  type = 2;
-  emoji = ":passport_control:";
- }
- public Tiles_Jail(String emoji) {
+  
+ public Tiles_GoToJail(String emoji) {
   // TODO Auto-generated constructor stub
   name = "Go To Jail!";
   type = 2;
-  this.emoji = emoji;
+  this.emoji = ":passport_control:";
  }
 
  void setName(String name) {

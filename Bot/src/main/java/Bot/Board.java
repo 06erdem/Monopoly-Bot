@@ -20,6 +20,7 @@ public class Board {
 		currPlayer = 0;
 		buildBoard();
 	}
+
 	void buildBoard() {
 		for(int i = 0; i < 40; i++) {
 			if(i==0)
@@ -124,8 +125,28 @@ public class Board {
 	void setTiles(Tiles[] tileList){ //set the tiles used for the board
 		tiles = tileList;
 	}
+
+	int getNumPlayers(){
+		return numPlayers;
+	}
+
+	void setNumPlayers(int newNumPlayers){
+		numPlayers = newNumPlayers;
+	}
+
+	int getCurrPlayer(){
+		return currPlayer;
+	}
+
+	void setCurrPlayer(int newCurrPlayer){
+		currPlayer = newCurrPlayer;
+	}
 	
-	
+	void addPlayer(long playerId, String emoji){
+		Player newPlayer = new Player(playerId, emoji);
+		playerList[numPlayers] = newPlayer;
+		numPlayers++;
+	}
 
 	String printBoard() {
 		String strBoard = "";
@@ -143,6 +164,255 @@ public class Board {
 		for(int j = 10; j >= 0; j--)
 			strBoard += tiles[j].getEmoji();
 		
+		return strBoard;
+	}
+	private int calcSpace(int[] ind, int pos) { // (Top = pos = 0) (bottom = pos = 1) (right = pos = 2) (left = pos = 3)
+		int ans = 0;
+		if(pos == 0) { //TOP
+			for(int i = 0; i < 4; i++) {
+				if(ans == 0 && ind[i]<30 && ind[i] > 20) {
+					if(ind[i]== ind[0])
+						ans++;
+					if(ind[i]==ind[1])
+						ans++;
+					if(ind[i]==ind[2])
+						ans++;
+					if(ind[i]==ind[3])
+						ans++;
+					break;
+				}
+			}
+			
+		}
+		else if(pos==1) { //BOTTOM
+			for(int i = 0; i < 4; i++) {
+				if(ans == 0 && ind[i]<10 && ind[i] > 0) {
+					if(ind[i]== ind[0])
+						ans++;
+					if(ind[i]==ind[1])
+						ans++;
+					if(ind[i]==ind[2])
+						ans++;
+					if(ind[i]==ind[3])
+						ans++;
+					break;
+				}
+			}
+			
+		}
+		else if(pos==2) { //RIGHT
+			for(int i = 0; i < 4; i++) {
+				if(ans == 0 && ind[i]>=30 && ind[i] <= 39) {
+					if(ind[i]== ind[0])
+						ans++;
+					if(ind[i]==ind[1])
+						ans++;
+					if(ind[i]==ind[2])
+						ans++;
+					if(ind[i]==ind[3])
+						ans++;
+					break;
+				}
+			}
+			
+		}
+		else if(pos==3) { //LEFT
+			for(int i = 0; i < 4; i++) {
+				if(ans == 0 && ind[i]<=20 && ind[i] >= 10) {
+					if(ind[i]== ind[0])
+						ans++;
+					if(ind[i]==ind[1])
+						ans++;
+					if(ind[i]==ind[2])
+						ans++;
+					if(ind[i]==ind[3])
+						ans++;
+					break;
+				}
+			}
+			
+		}
+		return ans;
+	}
+	String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't exist
+		String strBoard = "";
+		int[] arr = {a,b,c,d};
+		int top = calcSpace(arr, 0);
+		int bottom = calcSpace(arr, 1);
+		int left = calcSpace(arr, 3);
+		int right = calcSpace(arr, 2);
+		for(int i = 0; i < top; i++) {//print top tiles
+			for(int l = 0; l < left; l++) //Adjust left
+				strBoard += "⬛";
+			for(int j = 20; j < 31; j++) { //Top tiles
+				if(j!= 20 && j!= 30 && j == a) {
+					strBoard += ":pickup_truck:";
+					a = 40; //set position as 'printed'
+				}
+				else if(j!= 20 && j!= 30 && j == b) {
+					strBoard += ":race_car:";
+					b = 40;
+				}
+				else if(j!= 20 && j!= 30 && j == c) {
+					strBoard += ":bus:";
+					c = 40;
+				}
+				else if(j!= 20 && j!= 30 && j == d) {
+					strBoard += ":motorcycle:";
+					d = 40;
+				}
+				else
+					strBoard += "⬛";
+			}
+			strBoard += "\n";
+		}
+		for(int l = 0; l < left; l++) {//Adjust top-left
+				if(a == 20) {
+					strBoard += ":pickup_truck:";
+					a = 40;
+				}
+				else if(b == 20) {
+					strBoard += ":race_car:";
+					b = 40;
+				}
+				else if(c == 20) {
+					strBoard += ":bus:";
+					c = 40;
+				}
+				else if(d == 20) {
+					strBoard += ":motorcycle:";
+					d = 40;
+				}
+				else
+					strBoard += "⬛";
+		}
+		for(int i = 20; i < 31; i++) {//Top side
+			strBoard += tiles[i].getEmoji();
+		}
+		if(a == 30) {
+			strBoard += ":pickup_truck:";
+			a = 40;
+		}
+		if(b == 30) {
+			strBoard += ":race_car:";
+			b = 40;
+		}
+		if(c == 30) {
+			strBoard += ":bus:";
+			c = 40;
+		}
+		if(d == 30) {
+			strBoard += ":motorcycle:";
+			d = 40;
+		}
+		strBoard += "\n";
+		int L = 19;
+		for(int R = 31; R < 40; R++) { //Left and Right
+			for(int i = 0; i < left; i++) {
+				if(L == a) {
+					strBoard += ":pickup_truck:";
+					a = 40; //set position as 'printed'
+				}
+				else if(L == b) {
+					strBoard += ":race_car:";
+					b = 40;
+				}
+				else if(L == c) {
+					strBoard += ":bus:";
+					c = 40;
+				}
+				else if(L == d) {
+					strBoard += ":motorcycle:";
+					d = 40;
+				}
+				else
+					strBoard += "⬛";
+			}
+			strBoard += tiles[L].getEmoji();
+			strBoard += printSpaces();
+			strBoard += tiles[R].getEmoji();
+			for(int i = 0; i < right; i++) {
+				if(R == a) {
+					strBoard += ":pickup_truck:";
+					a = 40; //set position as 'printed'
+				}
+				if(R == b) {
+					strBoard += ":race_car:";
+					b = 40;
+				}
+				if(R == c) {
+					strBoard += ":bus:";
+					c = 40;
+				}
+				if(R == d) {
+					strBoard += ":motorcycle:";
+					d = 40;
+				}
+			}
+			L--;
+			strBoard += "\n";
+		}
+		for(int l = 0; l < left; l++) {//Adjust bottom-left
+			if(a == 10) {
+				strBoard += ":pickup_truck:";
+				a = 40;
+			}
+			else if(b == 10) {
+				strBoard += ":race_car:";
+				b = 40;
+			}
+			else if(c == 10) {
+				strBoard += ":bus:";
+				c = 40;
+			}
+			else if(d == 10) {
+				strBoard += ":motorcycle:";
+				d = 40;
+			}
+			else
+				strBoard += "⬛";
+	}
+		for(int j = 10; j >= 0; j--) //Bottom
+			strBoard += tiles[j].getEmoji();
+		if(a==0) {
+			strBoard += ":pickup_truck:";
+			a = 40; //set position as 'printed'
+		}
+		if(b==0) {
+			strBoard += ":race_car:";
+			b = 40;
+		}
+		if(c==0) {
+			strBoard += ":bus:";
+			c = 40;
+		}
+		if(d == 0) {
+			strBoard += ":motorcycle:";
+			d = 40;
+		}
+		for(int i = 0; i < bottom; i++) {
+			strBoard += "\n";
+			for(int j = 10; j >= 0; j--) {
+				if(j!= 0 && j!= 10 && j == a) {
+					strBoard += ":pickup_truck:";
+					a = 40; //set position as 'printed'
+				}
+				else if(j!= 0 && j!= 10 && j == b) {
+					strBoard += ":race_car:";
+					b = 40;
+				}
+				else if(j!= 0 && j!= 10 && j == c) {
+					strBoard += ":bus:";
+					c = 40;
+				}
+				else if(j!= 0 && j!= 10 && j == d) {
+					strBoard += ":motorcycle:";
+					d = 40;
+				}
+				else
+					strBoard += "⬛";
+			}
+		}
 		return strBoard;
 	}
 
@@ -163,4 +433,8 @@ public class Board {
 		return space;
 	}
 	
+	/* GETTERS and SETTERS */
+	public Board getBoard() {
+		return this;
+	}
 }

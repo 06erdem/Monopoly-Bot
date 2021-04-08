@@ -4,7 +4,7 @@ public class Player {
  
  int position; //position on board
  int money; //money
- ArrayList<Tiles> propertiesOwned; //properties owned by the player
+ ArrayList<Tiles> properties_Owned; //properties owned by the player
  boolean inJail;
  public Player(){
   position = 0;
@@ -13,7 +13,7 @@ public class Player {
   inJail = false;
  }
  
- public Player(int cash, int pos, Tiles[] properties){
+ public Player(int cash, int pos, Tiles properties){
   position = pos;
   money = cash;
   properties_Owned = properties;
@@ -52,15 +52,15 @@ public class Player {
  }
  
  void setOwnedProperties(Tiles[] properties){ //set the properties owned of the player
-   propertiesOwned = properties;
+   properties_Owned = properties;
  }
  
- Tiles[] getOwnedProperties(){ //get the properties owned by the player
-   return propertiesOwned;
+ Tiles getOwnedProperties(){ //get the properties owned by the player
+   return properties_Owned;
  }
  
  void buyProperty(Tiles_Property tile) {
-  propertiesOwned.add(tile);
+  properties_Owned.add(tile);
   addMoney(-tile.getValue());
  }
  
