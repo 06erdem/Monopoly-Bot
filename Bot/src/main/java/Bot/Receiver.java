@@ -168,6 +168,7 @@ public class Receiver extends ListenerAdapter {
 		}
 		
 		
+		
 	}
 	
 	/* Used for constructing and sending generic embed message. 

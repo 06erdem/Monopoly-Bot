@@ -2,18 +2,21 @@ package Bot;
 import java.util.*;
 public class Player {
  
- int position; //position on board
- int money; //money
+ int 	position; //position on board
+ int 	money; //money
+ String emoji;
  ArrayList<Tiles> properties_Owned; //properties owned by the player
  boolean inJail;
+ 
+ /* Default Constructor */
  public Player(){
   position = 0;
   money = 1500;
   properties_Owned = new ArrayList<Tiles>();
   inJail = false;
  }
- 
- public Player(int cash, int pos, Tiles properties){
+ public Player
+ public Player(int cash, int pos, ArrayList<Tiles> properties){
   position = pos;
   money = cash;
   properties_Owned = properties;

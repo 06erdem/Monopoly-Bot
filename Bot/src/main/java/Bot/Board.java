@@ -143,7 +143,7 @@ public class Board {
 	}
 	
 	void addPlayer(long playerId, String emoji){
-		Player newPlayer = new Player(playerId, emoji);
+		Player newPlayer = new Player();  // can use another constructor later.
 		playerList[numPlayers] = newPlayer;
 		numPlayers++;
 	}
