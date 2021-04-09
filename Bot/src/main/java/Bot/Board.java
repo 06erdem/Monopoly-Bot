@@ -66,6 +66,9 @@ public class Board {
    else if(i==19)
     tiles[i] = new Tiles_Property(200, 80, "New York Avenue",":house_with_garden:");
    else if(i==20)
+    //possible instatantion issue, tiles is an abstract class so can't create an object
+    //Solutions: create a new class that extends tiles that deals with free parking
+    //Set it as a tile_property
     tiles[i] = new Tiles("Free Parking",0, ":parking:");
    else if(i==21)
     tiles[i] = new Tiles_Property(220, 90, "Kentucky Avenue", ":homes:");
