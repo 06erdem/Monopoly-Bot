@@ -10,6 +10,8 @@ public class Board {
 	public Board(){
 		tiles = new Tiles[40];
 		playerList = new Player[4];
+		numPlayers = 0;
+		currPlayer = 0;
 		buildBoard();
 	}
 	
@@ -142,8 +144,8 @@ public class Board {
 		currPlayer = newCurrPlayer;
 	}
 	
-	void addPlayer(long playerId, String emoji){
-		Player newPlayer = new Player();  // can use another constructor later.
+	void addPlayer(String userID, String emoji){
+		Player newPlayer = new Player(userID , emoji);  // can use another constructor later.
 		playerList[numPlayers] = newPlayer;
 		numPlayers++;
 	}

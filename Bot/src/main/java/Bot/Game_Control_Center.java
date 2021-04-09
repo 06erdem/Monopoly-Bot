@@ -1,10 +1,12 @@
 package Bot;
+
+
 /* 
  * Control Center for game that handles interaction between board and receiver class.
  * Receiver : 
  *      take message from users
  *       call appropriate functions of controller according to message  (such as start new game, next move info 
- *                (trade, rolll dice, next turn, buy property ,... ) , reset game ,.... )
+ *                (trade, roll dice, next turn, buy property ,... ) , reset game ,.... )
  *       take action result from controller
  *        return appropriate message to chat depend on that action result 
  *
@@ -29,8 +31,7 @@ public class Game_Control_Center {
 	
 	private int 	gameState = 0 ; // 0 = uninitialized , 1 = running , 2 = finished or not running
 	private String 	rollArray[];  // take the output of roll dice function and split string into 2 numbers
-	
-	private String	instruction;  // instruction received from receiver class.
+	private String 	playerEmojis[] = new String[]{":pickup_truck:",":race_car:",":bus:",":motorcycle:"};
 	private Board 	board;
 	
 	public Game_Control_Center() {
@@ -48,11 +49,11 @@ public class Game_Control_Center {
 	 * 6   = buy properties
 	 * 7   = invoke trades
 	 * */
-	public String gameAction(int actionID) {
+	public String gameAction(int actionID , String userID) {
 		String resultMessage = "success";
 		
 		if ( (actionID >=1) && (actionID <= 4))
-			resultMessage = join(actionID);
+			resultMessage = join(actionID , userID);
 			
 		return resultMessage;
 	}
@@ -63,12 +64,17 @@ public class Game_Control_Center {
 	 * ALL PRIVATE HELPER METHODS for gameAction function go down here  * 
 	   *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  
 	 * */
-	private String join(int playerNumber) {
+	private String join(int playerNumber , String userID) {
 		String resultMessage = "success"; // default String of a successful operation
-		if (board.playerList[playerNumber - 1] != null);
-		return String.format("Cant join game ! Player %d already exist", playerNumber);
-		board.addPlayer(playerId, emoji);
-				
+		if (board.playerList[playerNumber - 1] != null)
+			return String.format("Cant join game ! Player %d already exist", playerNumber);
+		
+		board.addPlayer(userID, playerEmojis[playerNumber - 1]);
+		
+		/* This is a test String for join function in GameControl*/
+		resultMessage = String.format("Player emoji: \nPlayer num: %d \nPlayer id: %s",
+				board.playerList[playerNumber - 1].toString() ,playerNumber-1 , board.playerList[playerNumber - 1].userID);
+		return resultMessage;
 	}
 }
 
