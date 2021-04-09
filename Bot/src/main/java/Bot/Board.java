@@ -69,7 +69,7 @@ public class Board {
     //possible instatantion issue, tiles is an abstract class so can't create an object
     //Solutions: create a new class that extends tiles that deals with free parking
     //Set it as a tile_property
-    tiles[i] = new Tiles("Free Parking",0, ":parking:");
+    tiles[i] = new Tiles_Park("Free Parking",0, ":parking:");
    else if(i==21)
     tiles[i] = new Tiles_Property(220, 90, "Kentucky Avenue", ":homes:");
    else if(i==22)
@@ -170,7 +170,7 @@ public class Board {
   return strBoard;
  }
 
- String rollDice(int playerID){
+ String rollDice(long playerID){
   int dice1;
      int dice2;
   dice1 = (int)(Math.random()*6+1);
@@ -220,6 +220,8 @@ public class Board {
    if(tiles[player.position].hasOwner() == true){
      return 1;
    }
+   return 0;
+
  }
  
  String printSpaces() {

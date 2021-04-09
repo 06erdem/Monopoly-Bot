@@ -1,4 +1,6 @@
 package Bot;
+
+import java.util.ArrayList;
 public class Player {
  
 
@@ -26,7 +28,7 @@ public class Player {
  }
  
  void setId(long id){
-   playerID = id;
+   playerID = Long.toString(id);
  }
 
  String getId(){
