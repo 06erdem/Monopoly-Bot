@@ -2,11 +2,14 @@ package Bot;
 
 public class Tiles_GoToJail extends Tiles {
   // TODO Auto-generated constructor stub
-  name = "Go To Jail!";
-  type = 2;
-  emoji = ":passport_control:";
- }
- public Tiles_Jail(String emoji) {
+  String name = "Go To Jail!";
+  int type = 2;
+  String emoji = ":passport_control:";
+  boolean hasOwner = false;
+  int rent = 0;
+  int random = 0;
+ 
+ public Tiles_GoToJail(String emoji) {
   // TODO Auto-generated constructor stub
   name = "Go To Jail!";
   type = 2;
@@ -21,6 +24,19 @@ public class Tiles_GoToJail extends Tiles {
  int returnFee() {
   return 50;
  }
+ 
+ public boolean hasOwner(){
+   return hasOwner;
+ }
+ 
+ public int getRent(){
+   return rent;
+ }
+ 
+ public int getRandom(){
+   return random;
+ }
+ 
  public String toString() { return ":passport_control:"; }
 
 }
