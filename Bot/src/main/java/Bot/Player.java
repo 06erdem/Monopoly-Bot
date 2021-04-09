@@ -60,6 +60,7 @@ public class Player {
  }
  
  void buyProperty(Tiles_Property tile) {
+  tile.ownerNum = 1;
   propertiesOwned.add(tile);
   addMoney(-tile.getValue());
  }
