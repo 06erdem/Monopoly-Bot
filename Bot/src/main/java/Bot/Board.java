@@ -142,7 +142,7 @@ public class Board {
   currPlayer = newCurrPlayer;
  }
  
- void addPlayer(long playerId, String emoji){
+ void addPlayer(String playerId, String emoji){
   Player newPlayer = new Player(playerId, emoji);
   playerList[numPlayers] = newPlayer;
   numPlayers++;
