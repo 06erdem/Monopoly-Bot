@@ -22,4 +22,7 @@ public class Tiles {
 	int getType() {
 		return type;
 	}
+	 public abstract boolean hasOwner();
+ 	 public abstract int getRent();
+ 	 public abstract int getRandom();
 }
