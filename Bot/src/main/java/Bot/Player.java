@@ -2,8 +2,6 @@ package Bot;
 
 import java.util.*;
 
-import net.dv8tion.jda.api.entities.User;
-
 public class Player {
 
 	int position; // position on board
@@ -15,7 +13,8 @@ public class Player {
 
 	/* Default Constructor */
 	public Player(String userID , String emoji) {
-		this.userID 		= userID;
+		this.userID = userID;
+		this.emoji 	= emoji;
 		position 	= 0;
 		money 		= 1500;
 		properties_Owned = new ArrayList<Tiles>();

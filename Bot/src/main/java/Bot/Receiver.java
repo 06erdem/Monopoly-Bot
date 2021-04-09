@@ -4,7 +4,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.api.entities.User;
+
 
 public class Receiver extends ListenerAdapter {
 	
@@ -30,122 +30,22 @@ public class Receiver extends ListenerAdapter {
 			e.getChannel().purgeMessages(e.getChannel().getHistory().retrievePast(50).complete());
 		}
 		
-//		if(content.equals("!play")) {
-//			Board board_temp = new Board();
-//			EmbedBuilder embed = new EmbedBuilder();
-//			embed.setTitle("Welcome to Discord Monopoly!");
-//			embed.setDescription("Select your player emoji.\n1 :pickup_truck:    2 :race_car:    3 :bus:    4 :motorcycle:");
-//			embed.setFooter("Type 1, 2, 3 or 4.\n2-4 Players required\nPlayers cannot choose the same emoji. Type '!start' when ready.");
-//			e.getChannel().sendMessage(embed.build()).queue();
-//
-//		}
+		/* ACTIONS FOR INITIALIZNG THE GAME */
 		
+		/* Check player's turn by comparing userID. IF not this person's turn, IGNORE*/
+		/* Also check if a player has joined already, 1 person cannot be 2 players */
 		/* Actions when game has not been initialized */
+		if(content.equals("!easteregg")) testEmbed(); // just for testing embed function. delete afterwards or modify
 		if(content.equals("!play")) play(); 
 		if(content.equals("!join1") || content.equals("!join 1"))	joinReceiver(1, userID);  // join as player 1
 		if(content.equals("!join2")	|| content.equals("!join 2")) 	joinReceiver(2, userID);  // join as player 2
 		if(content.equals("!join3")	|| content.equals("!join 3")) 	joinReceiver(3, userID);  // join as player 3
 		if(content.equals("!join4")	|| content.equals("!join 4")) 	joinReceiver(4, userID);  // join as player 4
 		
-		/* Actions when game is running */
+		/* ACTIONS WHEN GAME IS RUNNING */
 		
-//		if(playCommand  != 0) {
-//			if(content.equals("1")) {
-//				if(!playersAvailable[0]){
-//					//Add Player function
-//					board_temp.numPlayers++; //Temp stub to allow testing
-//					playersAvailable[0] = 1;
-//				}
-//				else{
-//					embed.setTitle("Player 1 Token is already taken");
-//					e.getChannel().sendMessage(embed.build()).queue();
-//				}
-//			}
-//			if(content.equals("2")) {
-//				if(!playersAvailable[1]){
-//					//Add Player function
-//					board_temp.numPlayers++; //Temp stub to allow testing
-//					playersAvailable[1] = 1;
-//				}
-//				else{
-//					embed.setTitle("Player 2 Token is already taken");
-//					e.getChannel().sendMessage(embed.build()).queue();
-//				}
-//			}
-//			if(content.equals("3")) {
-//				if(!playersAvailable[2]){
-//					//Add Player function
-//					board_temp.numPlayers++; //Temp stub to allow testing
-//					playersAvailable[2] = 1;
-//				}
-//				else{
-//					embed.setTitle("Player 3 Token is already taken");
-//					e.getChannel().sendMessage(embed.build()).queue();
-//				}
-//			}
-//			if(content.equals("4")) {
-//				if(!playersAvailable[3]){
-//					//Add Player function
-//					board_temp.numPlayers++; //Temp stub to allow testing
-//					playersAvailable[3] = 1;
-//				}
-//				else{
-//					embed.setTitle("Player 4 Token is already taken");
-//					e.getChannel().sendMessage(embed.build()).queue();
-//				}
-//			}
-//			if(content.equals("!start")) {
-//				EmbedBuilder embed = new EmbedBuilder();
-//				if(board_temp.numPlayers <= 1){
-//					embed.setTitle("Not Enough Players");
-//					embed.setDescription("Select your player emoji.\n1 :pickup_truck:    2 :race_car:    3 :bus:    4 :motorcycle:");
-//					embed.setFooter("Type 1, 2, 3 or 4.\n2-4 Players required\nPlayers cannot choose the same emoji. Type '!start' when ready.");
-//					e.getChannel().sendMessage(embed.build()).queue();
-//				}
-//				else{
-//					board_temp.currPlayer = 1;
-//					embed.setTitle("Let the Game Begin!");
-//					embed.setDescription("");
-//					embed.setFooter("");
-//					e.getChannel().sendMessage(embed.build()).queue();
-//					playCommand = 0;
-//					startCommand = 1;
-//				}
-//			}
-//		}
-//		if(startCommand){
-//			if(content.equals("!roll")){
-//				
-//				rollArray = board_temp.rollDice().split(" ", 2);
-//				int sum = Integer.parseInt(rollArray[0]) + Integer.parseInt(rollArray[1]);
-//				EmbedBuilder embed = new EmbedBuilder();
-//				embed.setTitle("Rolled Dice!");
-//				embed.setDescription("Dice 1: " + rollArray[0] + "\nDice 2: " + rollArray[1] + "\nTotal: " + sum);
-//				if(rollArray[0].equals(rollArray[1])){
-//					embed.setFooter("Doubles! Roll Again!");
-//				}
-//				e.getChannel().sendMessage(embed.build()).queue();
-//			}
-//			if(content.toLowerCase().equals("printboard")) {
-//				e.getChannel().sendMessage(board_temp.printBoard()).queue();
-//			}
-//			
-//			//***This is how we can make the board and output look pretty.***//
-//			if(content.toLowerCase().equals("!printboard")) {
-//				EmbedBuilder embed = new EmbedBuilder();
-//				embed.setTitle(":pickup_truck: player's turn!");
-//				embed.setDescription(board_temp.printBoard());
-//				embed.setFooter("Instruction can be here:\nType 1 to buy\nType 2 to mortgage\n");
-//				e.getChannel().sendMessage(embed.build()).queue();
-//			}
-//		}
 	}
 	
-//	/* This is where action is sent to Contrller */
-//	private void decideAction(int receivedMessageID) {
-//		if (receivedMessageID == 1) start();
-//		if (receivedMessageID == 2) join();
-//	}
 	
 	private void play() {
 		embed = new EmbedBuilder();
@@ -170,6 +70,14 @@ public class Receiver extends ListenerAdapter {
 		
 		resultMessage = controller.gameAction(playerNum, userID); //since playerNum coincides with actionID in gameAction
 		sendGenericEmbed("Sucessfully add player" + playerNum, resultMessage, null);
+	}
+	
+	private void testEmbed() {
+		embed = new EmbedBuilder();
+		embed.setThumbnail("https://img.memecdn.com/computer-science-students-will-get-this_o_216650.jpg");
+		embed.setTitle("You found the Easter Egg !");
+		embed.setColor(0x527A00);
+		channel.sendMessage(embed.build()).queue();
 	}
 	
 	/* Used for constructing and sending generic embed message. 

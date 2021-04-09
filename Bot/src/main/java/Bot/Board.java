@@ -9,7 +9,7 @@ public class Board {
 	//public Tiles(int prices, String names, int index, int[6] rents){
 	public Board(){
 		tiles = new Tiles[40];
-		playerList = new Player[4];
+		playerList = new Player[]{null, null, null,null};
 		numPlayers = 0;
 		currPlayer = 0;
 		buildBoard();
@@ -236,6 +236,8 @@ public class Board {
 		}
 		return ans;
 	}
+	
+	/* if a, c are players : a = 1 , b = 40 , c = 3 , d= 40 */
 	String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't exist
 		String strBoard = "";
 		int[] arr = {a,b,c,d};
