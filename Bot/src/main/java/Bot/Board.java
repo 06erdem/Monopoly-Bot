@@ -177,34 +177,48 @@ public class Board {
   return rollOutput;
  }
 
- void movePosition(int dice1, int dice2, int playerID){
+ //return 0 if there is nothing the user can input after moving
+ int movePosition(int dice1, int dice2, int playerID){
    int sum = dice1 + dice2;
    int index = playerID -1;
    Player player = playerList[index];
-   if(player.inJail() == true){
+   if(player.getInJail() == true){
      if(dice1 == dice2){
-       player.inJail() == false;
-       return;
+       player.setInJail(false);
+       return 0;
      }
      else{
        player.payJail();
-       return;
+       return 0;
      }
    }
    player.position = player.getPosition() + sum;
-   if(player.position > 41){
-     player.position -= 41;
+   if(player.position > 39){
+     player.position -= 39;
      player.addMoney(200);
+   }
+   if(player.position ==2 || player.position == 7 || player.position == 22 || player.position ==33 || player.position == 37){
+     player.addMoney(tiles[player.position].getRandom());
+     return 0;
    }
    if(player.position == 30){
      player.goToJail();
+     return 0;
    }
+   //handle chance spot
+   
    //if player lands on property we want to give them an option to purchase
    //But how do we do this without user input for option to purchase
-   if(tiles[player.position].hasOwner == false){
+   if(tiles[player.position].hasOwner() == false){
      player.addMoney(tiles[player.position].getRent());
+     return 0;
+   }
+   //RETURN 1 this means that the user has the option to buy this property
+   if(tiles[player.position].hasOwner() == true){
+     return 1;
    }
  }
+ 
  String printSpaces() {
   String space = "";
   for(int i = 0; i < 9; i++) {
