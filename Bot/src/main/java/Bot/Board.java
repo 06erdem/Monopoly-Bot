@@ -221,6 +221,7 @@ public class Board {
      return 1;
    }
    return 0;
+
  }
  
  String printSpaces() {
