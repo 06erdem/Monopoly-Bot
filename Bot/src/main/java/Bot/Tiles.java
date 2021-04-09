@@ -22,4 +22,6 @@ public class Tiles {
 	int getType() {
 		return type;
 	}
+	
+	public String toString() { return emoji;}
 }
