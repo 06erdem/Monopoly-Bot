@@ -1,5 +1,6 @@
 public class Player {
  
+
  int position; //position on board
  int money; //money
  ArrayList<Tiles> propertiesOwned; //properties owned by the player
@@ -80,29 +81,29 @@ public class Player {
   addMoney(-tile.getValue());
  }
  
- void rentProperty(Tiles_Property tile) {
-  addMoney(-tile.getRent());
- }
+	void rentProperty(Tiles_Property tile) {
+		addMoney(-tile.getRent());
+	}
  
- void collectRent(Tiles_Property tile){
-   addMoney(tile.getRent());
- }
+	void collectRent(Tiles_Property tile){
+		addMoney(tile.getRent());
+	}
  
- void payTax(Tiles_Tax tile) {
-  addMoney(-tile.getTax());
- }
+	void payTax(Tiles_Tax tile) {
+		addMoney(-tile.getTax());
+	}
  
-  void payJail() {
-  addMoney(-50);
-  inJail = false;
- }
- //****Functions for tiles****//
- /*
- 
- 
+	void payJail() {	
+		addMoney(-50);
+		inJail = false;
+	}
+	 //****Functions for tiles****//
+	 /*
  
  
- void payJail() {
-  addMoney(-5-);
- }*/
+ 
+	
+	 void payJail() {
+	  addMoney(-5-);
+	 }*/
 }
