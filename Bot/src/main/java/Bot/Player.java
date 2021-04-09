@@ -1,88 +1,85 @@
-package Bot;
-import java.util.*;
 public class Player {
  
-	int position; //position on board
-	int money; //money
-	ArrayList<Tiles> propertiesOwned; //properties owned by the player
-	boolean inJail;
-	long playerId;
-	String playerEmoji;
 
-	public Player(){
-		position = 0;
-		money = 1500;
-		properties_Owned = new ArrayList<Tiles>();
-		inJail = false;
-		emoji = "";
-	}
-	
-	public Player(long id, String emoji){
-	 	position = 0;
-	 	money = 1500;
-	 	properties_Owned = new ArrayList<Tiles>();
-	 	inJail = false;
-	 	playerId = id;
-		playerEmoji = emoji;
-	}
-	
-	void setInJail(boolean jail){
-		inJail = jail;
-	}
-	
-	void goToJail(){
-		inJail = true;
-		position = 30;
-	}
-
-	boolean getInJail(){
-		return inJail;
-	}
-	
-	void setPosition(int pos) { //Set position on board
-		position = pos;
-	}
-
-	int getPosition() { //Get position on board
-		return position;
-	}
-	
-	void addMoney(int diff) { //Adds or subtracts given amount from player's money
-		money += diff;
-	}	
-
-	void setMoney(int cash) {
-		money = cash;
-	}
-
-	int getMoney() {
-		return money;
-	}
+ int position; //position on board
+ int money; //money
+ ArrayList<Tiles> propertiesOwned; //properties owned by the player
+ boolean inJail;
+ String playerID;
+ String playerEmoji;
  
- 	void setId(long id){
-		playerId = id;
-	}
-
-	long getId(){
-		return playerId;
-	}
-
-	String getEmoji() {
-		return playerEmoji;
-	}
-
-	void setOwnedProperties(Tiles[] properties){ //set the properties owned of the player
-		propertiesOwned = properties;
-	}
+ public Player(){
+  position = 0;
+  money = 1500;
+  propertiesOwned = new ArrayList<Tiles>();
+  inJail = false;
+ }
  
-	Tiles[] getOwnedProperties(){ //get the properties owned by the player
-		return propertiesOwned;
-	}
+ public Player(String ID, String emojis){
+  position = 0;
+  money = 1500;
+  propertiesOwned = new ArrayList<Tiles>();
+  inJail = false;
+  playerID = ID;
+  playerEmoji = emojis;
+ }
  
-	void buyProperty(Tiles_Property tile) {
-		propertiesOwned.add(tile);
-		addMoney(-tile.getValue());
-	}
+ void setId(long id){
+   playerID = id;
+ }
+
+ String getId(){
+   return playerID;
+ }
+
+ String getEmoji() {
+   return playerEmoji;
+ }
+ 
+ void setInJail(boolean jail){
+   inJail = jail;
+ }
+ 
+ void goToJail(){
+   inJail = true;
+   position = 11;
+ }
+ 
+ boolean getInJail(){
+   return inJail;
+ }
+ 
+ void setPosition(int pos) { //Set position on board
+  position = pos;
+ }
+ int getPosition() { //Get position on board
+  return position;
+ }
+ 
+ void addMoney(int diff) { //Adds or subtracts given amount from player's money
+  money += diff;
+ }
+
+ void setMoney(int cash) {
+  money = cash;
+ }
+ int getMoney() {
+  return money;
+ }
+ 
+ void setOwnedProperties(ArrayList<Tiles> properties){ //set the properties owned of the player
+   propertiesOwned = properties;
+ }
+ 
+ ArrayList<Tiles> getOwnedProperties(){ //get the properties owned by the player
+   return propertiesOwned;
+ }
+ 
+ void buyProperty(Tiles_Property tile) {
+  tile.ownerNum = 1;
+  propertiesOwned.add(tile);
+  addMoney(-tile.getValue());
+ }
  
 	void rentProperty(Tiles_Property tile) {
 		addMoney(-tile.getRent());

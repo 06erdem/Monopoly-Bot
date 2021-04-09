@@ -5,6 +5,7 @@ public class Tiles_Property extends Tiles  {
  int value;
  int rent;
  boolean isMortgaged = false;
+ int random = 0;
  public Tiles_Property(int value, int rent, String name) {
   // TODO Auto-generated constructor stub
   ownerNum = 5; //Owner number = 5 can mean there is no owner. This removes need for boolean. Simple encapsulation.
@@ -23,7 +24,11 @@ public class Tiles_Property extends Tiles  {
   this.name = name;
   this.emoji = emoji;
  }
- boolean hasOwner() {
+ 
+ public int getRandom(){
+   return random;
+ }
+ public boolean hasOwner() {
   return ownerNum == 5;
  }
  void freeOwner() {
@@ -45,7 +50,7 @@ public class Tiles_Property extends Tiles  {
    return value;
  }
  
- int getRent(){
+ public int getRent(){
    return rent;
  }
  
