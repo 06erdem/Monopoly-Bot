@@ -1,23 +1,38 @@
-package Bot;
-import java.util.*;
 public class Player {
  
  int position; //position on board
  int money; //money
  ArrayList<Tiles> propertiesOwned; //properties owned by the player
  boolean inJail;
+ String playerID;
+ String playerEmoji;
+ 
  public Player(){
   position = 0;
   money = 1500;
-  properties_Owned = new ArrayList<Tiles>();
+  propertiesOwned = new ArrayList<Tiles>();
   inJail = false;
  }
  
- public Player(int cash, int pos, Tiles[] properties){
-  position = pos;
-  money = cash;
-  properties_Owned = properties;
+ public Player(String ID, String emojis){
+  position = 0;
+  money = 1500;
+  propertiesOwned = new ArrayList<Tiles>();
   inJail = false;
+  playerID = ID;
+  playerEmoji = emojis;
+ }
+ 
+ void setId(long id){
+   playerID = id;
+ }
+
+ String getId(){
+   return playerID;
+ }
+
+ String getEmoji() {
+   return playerEmoji;
  }
  
  void setInJail(boolean jail){
