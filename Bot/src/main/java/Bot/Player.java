@@ -51,11 +51,11 @@ public class Player {
   return money;
  }
  
- void setOwnedProperties(Tiles[] properties){ //set the properties owned of the player
+ void setOwnedProperties(ArrayList<Tiles> properties){ //set the properties owned of the player
    propertiesOwned = properties;
  }
  
- Tiles[] getOwnedProperties(){ //get the properties owned by the player
+ ArrayList<Tiles> getOwnedProperties(){ //get the properties owned by the player
    return propertiesOwned;
  }
  
