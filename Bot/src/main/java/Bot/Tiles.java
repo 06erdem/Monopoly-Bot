@@ -1,6 +1,6 @@
 package Bot;
 /* Parent class for all tiles of the board */
-public class Tiles {
+public abstract class Tiles {
 	/* contain the coordinate of the tile on the board */
 	//private int[] coordinate;
 	int type; //Type = (0=Nothing Specific/Parking) (1=Start) (2=Property) (3=Jail) (4=Chance/Chest) (5=Tax)
@@ -22,4 +22,7 @@ public class Tiles {
 	int getType() {
 		return type;
 	}
+	 public abstract boolean hasOwner();
+ 	 public abstract int getRent();
+ 	 public abstract int getRandom();
 }
