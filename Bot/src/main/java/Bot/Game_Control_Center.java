@@ -105,13 +105,44 @@ public class Game_Control_Center {
 				else if(gameState == 2) //if the game is already running
 					sendGenericEmbed(null, "Can't join running game.",null);
 			}
-			else if(input.equals("!leave"))
+			else if(input.equals("!leave")) {
 				leaveGame(userID);
+				if(board.numPlayers < 2 && gameState == 2) { //Ends game and resets values if not enough players
+					sendGenericEmbed("Game ended, Not enough players","Player has left, leaving you alone in the game. The game has ended", null);
+					board = new Board();
+					gameState = 3;
+				}
+			}
 			else if(input.equals("!printboard"))
 				board.printBoard();
 			else if(input.equals("commands"))
 				sendGenericEmbed("Commands:","**!play** to start game.\n**!join 1/2/3/4** to join game.\n**!leave** to leave game\n**!start** to start game.",null);
 			
+			//Functions for running game
+			else if(input.equals("!start") && gameState == 1) {
+				if(board.numPlayers > 1) {
+					gameState = 2;
+					printboard();
+				}
+				else
+					sendGenericEmbed("Not enough players!", "You need at least 2 players to start",null);
+			}
+			//Functions for 
+			else if(gameState == 2 && board.playerList[board.getCurrPlayer()].getId().equals(userID)) {
+				if(input.equals("d")) { //To roll dice, command instructions will be given in the footer of each print board
+					
+				}
+				if(input.equals("b")) { //To buy property
+					
+				}
+				if(input.equals("r")) { //To rent
+					
+				}
+				if(input.equals("p")) { //To pay fee, tax, etc
+					
+				}
+				
+			}
 			//functions for testing
 			else if(input.contains("show"))
 				showPlayers();
@@ -128,6 +159,14 @@ public class Game_Control_Center {
 			}
 			sendGenericEmbed("Player " + (i+1) + "Left!","Space is now available", null);
 		}
+	}
+	public void printboard() {
+		int[] playerPositions = {40,40,40,40}; //all positions are set as non-existing
+		for(int i = 0; i < 4; i++)
+			if(board.playerList[i] != null)
+				playerPositions[i] = board.playerList[i].getPosition();
+		String strBoard =  board.printBoard(playerPositions[0],playerPositions[1],playerPositions[2],playerPositions[3]);
+		sendGenericEmbed(board.playerList[board.getCurrPlayer()].getEmoji() + " Player " + board.getCurrPlayer() + "'s Turn!", strBoard, "Press d to roll dice");
 	}
 	public void joinReceiver(String input, String userID) {
 		int playerNum;
