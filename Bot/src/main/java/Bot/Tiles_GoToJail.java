@@ -39,4 +39,10 @@ public class Tiles_GoToJail extends Tiles {
  
  public String toString() { return ":passport_control:"; }
 
+@Override
+public String getMessage(int playNum) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
 }

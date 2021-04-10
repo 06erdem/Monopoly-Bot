@@ -36,4 +36,9 @@ public class Tiles_Tax extends Tiles {
  void setTax(int t){
    tax = t;
 }
+@Override
+public String getMessage(int playNum) {
+	// TODO Auto-generated method stub
+	return null;
+}
 }

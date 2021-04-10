@@ -166,7 +166,9 @@ public class Game_Control_Center {
 			if(board.playerList[i] != null)
 				playerPositions[i] = board.playerList[i].getPosition();
 		String strBoard =  board.printBoard(playerPositions[0],playerPositions[1],playerPositions[2],playerPositions[3]);
-		sendGenericEmbed(board.playerList[board.getCurrPlayer()].getEmoji() + " Player " + board.getCurrPlayer() + "'s Turn!", strBoard, "Press d to roll dice");
+		String message = (board.tiles[board.playerList[board.getCurrPlayer()].getPosition()]).getMessage(board.currPlayer);
+		sendGenericEmbed(board.playerList[board.getCurrPlayer()].getEmoji() + " Player " + board.getCurrPlayer() + "'s Turn!",
+				strBoard, message);
 	}
 	public void joinReceiver(String input, String userID) {
 		int playerNum;
