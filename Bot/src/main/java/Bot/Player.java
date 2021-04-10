@@ -13,7 +13,7 @@ public class Player {
  String playerEmoji;
  
  public Player(){
-  position = 0;
+  position = 40;
   money = 1500;
   propertiesOwned = new ArrayList<Tiles>();
   inJail = false;
