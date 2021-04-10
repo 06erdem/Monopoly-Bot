@@ -28,40 +28,9 @@ public class Tiles_Start extends Tiles {
   }
   public String toString() { return ":checkered_flag:"; }
 
-@Override
-public String getMessage(int playNum) {
-	// TODO Auto-generated method stub
-	return null;
+  @Override
+  public String getMessage(int playNum) {
+	  // TODO Auto-generated method stub
+	  return null;
+  }
 }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
