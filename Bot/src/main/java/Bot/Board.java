@@ -460,7 +460,7 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
  //return 0 if there is nothing the user can input after moving
  int movePosition(int dice1, int dice2, int playerID){
    int sum = dice1 + dice2;
-   int index = playerID -1;
+   int index = playerID;
    Player player = playerList[index];
    if(player.getInJail() == true){
      if(dice1 == dice2){
