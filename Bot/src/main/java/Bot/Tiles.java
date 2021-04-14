@@ -22,6 +22,7 @@ public abstract class Tiles {
 	int getType() {
 		return type;
 	}
+	 public abstract String getMessage(int playNum);
 	 public abstract boolean hasOwner();
  	 public abstract int getRent();
  	 public abstract int getRandom();

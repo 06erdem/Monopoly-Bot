@@ -33,5 +33,10 @@ public class Tiles_Chance extends Tiles {
  public int getRent(){
    return rent;
  }
+@Override
+public String getMessage(int playNum) {
+	// TODO Auto-generated method stub
+	return null;
+}
  
 }

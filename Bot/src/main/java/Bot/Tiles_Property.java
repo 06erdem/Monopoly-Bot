@@ -8,7 +8,7 @@ public class Tiles_Property extends Tiles  {
  int random = 0;
  public Tiles_Property(int value, int rent, String name) {
   // TODO Auto-generated constructor stub
-  ownerNum = 5; //Owner number = 5 can mean there is no owner. This removes need for boolean. Simple encapsulation.
+  ownerNum = 4; //Owner number = 4 can mean there is no owner. This removes need for boolean. Simple encapsulation.
   type = 2;
   this.value = value;
   this.rent = rent;
@@ -17,7 +17,7 @@ public class Tiles_Property extends Tiles  {
  }
  public Tiles_Property(int value, int rent, String name, String emoji) {
   // TODO Auto-generated constructor stub
-  ownerNum = 5; //Owner number = 5 can mean there is no owner. This removes need for boolean. Simple encapsulation.
+  ownerNum = 4; //Owner number = 4 can mean there is no owner. This removes need for boolean. Simple encapsulation.
   type = 2;
   this.value = value;
   this.rent = rent;
@@ -29,13 +29,16 @@ public class Tiles_Property extends Tiles  {
    return random;
  }
  public boolean hasOwner() {
-  return ownerNum == 5;
+  return ownerNum == 4;
  }
  void freeOwner() {
-  ownerNum = 5;
+  ownerNum = 4;
  }
  int getOwner() {
   return ownerNum;
+ }
+ void setOwner(int newOwner) {
+	 ownerNum = newOwner;
  }
  void setMortgaged() {
   isMortgaged = true;
@@ -65,4 +68,17 @@ public class Tiles_Property extends Tiles  {
   this.name = name;
  }
  public String toString() { return ":classical_building:"; }
+ public String getMessage(int playerNum) {
+	 if(hasOwner()) {
+		 if(isMortgaged())
+			 return "This property is mortgaged. You can stay here rent free!\n";
+		 else if(playerNum == ownerNum)
+			 return "You are the owner of this property and can stay here rent free!\n";
+		 else
+			 return "This property is owned by player " + getOwner() + "pay rent to stay here or declare bankrupcy by typing 'bankrupt'";
+	 }
+	 else {
+		 return "You can buy this property for $" + getValue() + "\nPress 'b' to make the purchase!"; 
+	 }
+ }
 }
