@@ -498,6 +498,7 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
      return 1;
    }
    return 0;
+
  }
  
  String printSpaces() {
