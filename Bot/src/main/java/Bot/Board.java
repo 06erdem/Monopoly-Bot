@@ -491,6 +491,8 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
    //But how do we do this without user input for option to purchase
    if(tiles[player.position].hasOwner() == false){
      player.addMoney(-tiles[player.position].getRent());
+     int playerId = tiles[player.position].getOwner();
+     playerList[playerId].addMoney(tiles[player.position].getRent());
      return 0;
    }
    //RETURN 1 this means that the user has the option to buy this property
