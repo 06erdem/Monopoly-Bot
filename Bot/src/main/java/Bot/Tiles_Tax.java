@@ -39,10 +39,6 @@ public class Tiles_Tax extends Tiles {
  void setTax(int t){
    tax = t;
 }
-public int getOwner() {
-  // TODO Auto-generated method stub
-  return 0;
-}
 @Override
 public String getMessage(int playNum) {
 	// TODO Auto-generated method stub

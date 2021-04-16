@@ -40,10 +40,6 @@ public class Tiles_Jail extends Tiles {
   public int getRandom(){
     return random;
   }
-  public int getOwner() {
-    // TODO Auto-generated method stub
-    return 0;
-}
   public String toString() { return ":passport_control:"; }
 @Override
 public String getMessage(int playNum) {
