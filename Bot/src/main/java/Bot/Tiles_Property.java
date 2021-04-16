@@ -74,7 +74,7 @@ public class Tiles_Property extends Tiles  {
 		 if(isMortgaged())
 			 return "This property is mortgaged. You can stay here rent free!\n";
 		 else if(playerNum == ownerNum)
-			 return "You are the owner of this property and can stay here rent free!\n";
+			 return "You are on your own property. Press 'd' to roll dice!\n";
 		 else
 			 return "This property is owned by player " + getOwner() + " pay rent by pressing 'p' to stay here or declare bankrupcy by typing 'bankrupt'";
 	 }
