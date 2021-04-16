@@ -461,6 +461,8 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
  //return 1 if the user can buy the property landed on
  //return 2 if the user landed on an owned tile
  //return 3 if the user is out of money
+ //return 4 if the user was sent to jail
+ //return 5 if the user landed on chance
  int movePosition(int dice1, int dice2, int playerID){
    int sum = dice1 + dice2;
    int index = playerID;
@@ -485,11 +487,11 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
    }
    if(player.position ==2 || player.position == 7 || player.position == 22 || player.position ==33 || player.position == 37){
      player.addMoney(tiles[player.position].getRandom());
-     return 0;
+     return 5;
    }
    if(player.position == 30){
      player.goToJail();
-     return 0;
+     return 4;
    }
    //handle chance spot
    
