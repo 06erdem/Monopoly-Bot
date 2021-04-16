@@ -25,7 +25,6 @@ public class Tiles_Park extends Tiles {
 	}
 	@Override
 	public String getMessage(int playNum) {
-		// TODO Auto-generated method stub
-		return null;
+		return "Free Parking!";
 	}
 }
