@@ -27,7 +27,10 @@ public class Tiles_Start extends Tiles {
     return 200;
   }
   public String toString() { return ":checkered_flag:"; }
-
+  public int getOwner() {
+    // TODO Auto-generated method stub
+    return 0;
+  } 
   @Override
   public String getMessage(int playNum) {
 	  // TODO Auto-generated method stub
