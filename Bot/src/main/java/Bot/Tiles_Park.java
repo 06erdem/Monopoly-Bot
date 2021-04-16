@@ -23,9 +23,17 @@ public class Tiles_Park extends Tiles {
 	public int getRandom() {
 		return 0;
 	}
+	public int getOwner() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	@Override
 	public String getMessage(int playNum) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public int getRandom(){
+		return 0;
 	}
 }

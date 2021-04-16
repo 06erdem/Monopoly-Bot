@@ -6,6 +6,7 @@ public class Tiles_Chance extends Tiles {
  int max = 50;
  int random;
  int rent = 0;
+ int owner = 0;
  boolean hasOwner = false;
  public Tiles_Chance() {
   name = "Chance!";
@@ -23,7 +24,9 @@ public class Tiles_Chance extends Tiles {
   hasOwner = false;
   rent = 0;
  }
- 
+ public int getOwner(){
+   return owner;
+ }
  public int getRandom(){
    return random;
  }
@@ -32,6 +35,10 @@ public class Tiles_Chance extends Tiles {
  }
  public int getRent(){
    return rent;
+ }
+ public int getOwner() {
+     // TODO Auto-generated method stub
+     return 0;
  }
 @Override
 public String getMessage(int playNum) {
