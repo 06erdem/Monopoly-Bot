@@ -29,7 +29,7 @@ public class Board {
    else if(i==1)
     tiles[i] = new Tiles_Property(60,10,"Mediteranean Avenue");
    else if(i==2) //This is a chest
-    tiles[i] = new Tiles_Chance();
+    tiles[i] = new Tiles_Chance("Community Chest!", ":coin:");
    else if(i==3)
     tiles[i] = new Tiles_Property(200,20,"Baltic Avenue");
    else if(i==4)
@@ -61,7 +61,7 @@ public class Board {
    else if(i==16)
     tiles[i] = new Tiles_Property(180, 70, "St. James Palace", ":house_with_garden:");
    else if(i==17) //This is a chest
-    tiles[i] = new Tiles_Chance();
+    tiles[i] = new Tiles_Chance("Community Chest", ":coin:");
    else if(i==18)
     tiles[i] = new Tiles_Property(180, 70, "Tennesse Avenue", ":house_with_garden:");
    else if(i==19)
@@ -88,13 +88,13 @@ public class Board {
     tiles[i] = new Tiles_Property(280, 120, "Marvin Gardens", ":homes:");
    else if(i==30) //Jail WITH action
     //TO-DO: Action
-    tiles[i] = new Tiles_Jail(":passport_control:");
+    tiles[i] = new Tiles_GoToJail();
    else if(i==31)
     tiles[i] = new Tiles_Property(300, 130, "Pacific Avenue", ":classical_building:");
    else if(i==32)
     tiles[i] = new Tiles_Property(300, 130, "North Carolina Avenue", ":classical_building:");
    else if(i==33) //This is a chest
-    tiles[i] = new Tiles_Chance();
+    tiles[i] = new Tiles_Chance("Community Chest!", ":coin:");
    else if(i==34)
     tiles[i] = new Tiles_Property(320, 150,"Pennsylvania Avenue", ":classical_building:");
    else if(i==35)
@@ -447,7 +447,7 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
 	}
 	return strBoard;
 }
- String rollDice(long playerID){
+ String rollDice(){
   int dice1;
      int dice2;
   dice1 = (int)(Math.random()*6+1);

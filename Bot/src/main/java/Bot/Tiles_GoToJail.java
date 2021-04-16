@@ -4,7 +4,6 @@ public class Tiles_GoToJail extends Tiles {
   // TODO Auto-generated constructor stub
   String name = "Go To Jail!";
   int type = 2;
-  String emoji = ":passport_control:";
   boolean hasOwner = false;
   int rent = 0;
   int random = 0;
@@ -15,7 +14,12 @@ public class Tiles_GoToJail extends Tiles {
   type = 2;
   this.emoji = emoji;
  }
-
+ public Tiles_GoToJail() {
+	  // TODO Auto-generated constructor stub
+	  name = "Go To Jail!";
+	  type = 2;
+	  this.emoji = ":passport_control:";
+	 }
  void setName(String name) {
   this.name = name;
  }
@@ -50,7 +54,7 @@ public class Tiles_GoToJail extends Tiles {
 @Override
 public String getMessage(int playNum) {
 	// TODO Auto-generated method stub
-	return null;
+	return "Go to jail!, you will be taken to jail!";
 }
 
 }

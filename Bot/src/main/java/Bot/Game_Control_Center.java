@@ -115,12 +115,12 @@ public class Game_Control_Center {
 			}
 			else if(input.equals("!printboard"))
 				board.printBoard();
-			else if(input.equals("commands"))
+			else if(input.equals("commands") || input.equals("!commands"))
 				sendGenericEmbed("Commands:","**!play** to start game.\n**!join 1/2/3/4** to join game.\n**!leave** to leave game\n**!start** to start game.",null);
 			
 			//Functions for running game
 			else if(input.equals("!start") && gameState == 1) {
-				if(board.numPlayers > 1) {
+				if(board.numPlayers >= 1) {
 					gameState = 2;
 					printboard();
 				}
@@ -138,7 +138,11 @@ public class Game_Control_Center {
 				if(input.equals("d")) { //To roll dice, command instructions will be given in the footer of each print board
 					Player currentPlayer = board.playerList[board.getCurrPlayer()];
 					int initialPosition = currentPlayer.getPosition();
-					int moveState = board.movePosition(1, 1, board.getCurrPlayer()); //TODO:Add dice call & dice values to movePosition call
+					String diceOutput = board.rollDice();
+     					String[] dice = diceOutput.split(" ");
+     					int dice1 = Integer.parseInt(dice[0]);
+     					int dice2 = Integer.parseInt(dice[1]);
+					int moveState = board.movePosition(dice1, dice2, board.getCurrPlayer()); //TODO:Add dice call & dice values to movePosition call
 					if((initialPosition > currentPlayer.getPosition()) && (currentPlayer.getInJail() == false)){
 						//Print passing GO message
 					}
@@ -210,7 +214,7 @@ public class Game_Control_Center {
 				playerPositions[i] = board.playerList[i].getPosition();
 		String strBoard =  board.printBoard(playerPositions[0],playerPositions[1],playerPositions[2],playerPositions[3]);
 		String message = (board.tiles[board.playerList[board.getCurrPlayer()].getPosition()]).getMessage(board.currPlayer);
-		sendGenericEmbed(board.playerList[board.getCurrPlayer()].getEmoji() + " Player " + board.getCurrPlayer() + "'s Turn!",
+		sendGenericEmbed(board.playerList[board.getCurrPlayer()].getEmoji() + " Player " + board.getCurrPlayer() + "'s Turn!\n" + ":moneybag:Money: " + board.playerList[board.getCurrPlayer()].getMoney(),
 				strBoard, message);
 	}
 	public void joinReceiver(String input, String userID) {
