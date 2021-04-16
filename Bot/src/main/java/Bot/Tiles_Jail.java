@@ -47,7 +47,7 @@ public class Tiles_Jail extends Tiles {
 @Override
 public String getMessage(int playNum) {
 	// TODO Auto-generated method stub
-	return null;
+	return "Jail! You are visiting so there's nothing much to do here...";
 }
 
 }

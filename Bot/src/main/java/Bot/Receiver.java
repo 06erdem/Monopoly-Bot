@@ -21,21 +21,18 @@ public class Receiver extends ListenerAdapter {
 		String userID = e.getAuthor().getId();
 		
 		
-		
-		
-		if(content.equals("hi")) {
-			e.getChannel().sendMessage("what's up mate!").queue();
+		if(content.equals("!play") || ( (controller.getState() == 1 || controller.getState() == 2))) { // state = 1 means it is setting up the game and should take input 
+			controller.run(embed, channel, content, userID);                                          // state = 2 means the game is running and should take input
 		}
 		if(content.equals("!commands")) {//I don't know why but this doesn't work
 			e.getChannel().sendMessage("Type \"!play\" to start the game!");
 		}
+		if(content.equals("hi")) {
+			e.getChannel().sendMessage("what's up mate!").queue();
+		}
 		if(content.contains("!delete")) {
 			e.getChannel().purgeMessages(e.getChannel().getHistory().retrievePast(50).complete());
 		}
-		if(content.equals("!play") || ( (controller.getState() == 1 || controller.getState() == 2))) { // state = 1 means it is setting up the game and should take input 
-			controller.run(embed, channel, content, userID);                                          // state = 2 means the game is running and should take input
-		}
-		
 	}
 	/* Used for constructing and sending generic embed message. 
 	 * If no title or footer is present, call the function with them as null: 

@@ -45,6 +45,6 @@ public class Tiles_Tax extends Tiles {
 @Override
 public String getMessage(int playNum) {
 	// TODO Auto-generated method stub
-	return null;
+	return "Time to pay your taxes! Press 'p' to pay " + getTax() + ", or type \"bankrupt\" to declare bankrupcy!";
 }
 }

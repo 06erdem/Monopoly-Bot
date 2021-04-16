@@ -115,12 +115,12 @@ public class Game_Control_Center {
 			}
 			else if(input.equals("!printboard"))
 				board.printBoard();
-			else if(input.equals("commands"))
+			else if(input.equals("commands") || input.equals("!commands"))
 				sendGenericEmbed("Commands:","**!play** to start game.\n**!join 1/2/3/4** to join game.\n**!leave** to leave game\n**!start** to start game.",null);
 			
 			//Functions for running game
 			else if(input.equals("!start") && gameState == 1) {
-				if(board.numPlayers > 1) {
+				if(board.numPlayers >= 1) {
 					gameState = 2;
 					printboard();
 				}
@@ -201,7 +201,7 @@ public class Game_Control_Center {
 				playerPositions[i] = board.playerList[i].getPosition();
 		String strBoard =  board.printBoard(playerPositions[0],playerPositions[1],playerPositions[2],playerPositions[3]);
 		String message = (board.tiles[board.playerList[board.getCurrPlayer()].getPosition()]).getMessage(board.currPlayer);
-		sendGenericEmbed(board.playerList[board.getCurrPlayer()].getEmoji() + " Player " + board.getCurrPlayer() + "'s Turn!",
+		sendGenericEmbed(board.playerList[board.getCurrPlayer()].getEmoji() + " Player " + board.getCurrPlayer() + "'s Turn!\n" + ":moneybag:Money: " + board.playerList[board.getCurrPlayer()].getMoney(),
 				strBoard, message);
 	}
 	public void joinReceiver(String input, String userID) {
