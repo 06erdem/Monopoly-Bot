@@ -41,6 +41,10 @@ public class Tiles_GoToJail extends Tiles {
    return random;
  }
 
+ public int getValue(){
+   return 0;
+ }
+ 
  public String toString() { return ":passport_control:"; }
 
 @Override

@@ -79,6 +79,11 @@ public class Player {
    return propertiesOwned;
  }
 
+ Tiles sellOwnedProperty(){
+    Tiles soldTile = propertiesOwned.remove(propertiesOwned.size() - 1);
+    return soldTile;
+ }
+
  int getNumProperties(){
    return propertiesOwned.size();
  }

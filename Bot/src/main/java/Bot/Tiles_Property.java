@@ -49,7 +49,7 @@ public class Tiles_Property extends Tiles  {
  boolean isMortgaged() {
   return isMortgaged;
  }
- int getValue(){
+ public int getValue(){
    return value;
  }
  

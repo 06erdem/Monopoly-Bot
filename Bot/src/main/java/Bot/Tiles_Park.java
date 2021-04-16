@@ -32,4 +32,7 @@ public class Tiles_Park extends Tiles {
 	public int getRandom(){
 		return 0;
 	}
+	public int getValue(){
+		return 0;
+	  }
 }
