@@ -32,4 +32,8 @@ public class Tiles_Park extends Tiles {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public int getRandom(){
+		return 0;
+	}
 }

@@ -79,7 +79,7 @@ public class Player {
  }
  
  void buyProperty(Tiles_Property tile, int id) {
-  tile.setOwner = id;
+  tile.setOwner(id);
   propertiesOwned.add(tile);
   addMoney(-tile.getValue());
  }

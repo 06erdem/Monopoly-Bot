@@ -4,6 +4,7 @@ public class Tiles_Jail extends Tiles {
   int rent = 0;
   int random = 0;
   boolean hasOwner = false;
+  int owner;
   public Tiles_Jail() {
     // TODO Auto-generated constructor stub
     name = "Jail! No action";
@@ -25,7 +26,9 @@ public class Tiles_Jail extends Tiles {
   int returnFee() {
     return 50;
   }
-  
+  public int getOwner(){
+    return owner;
+  }
   public boolean hasOwner(){
     return hasOwner;
   }
