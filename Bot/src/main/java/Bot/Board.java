@@ -474,9 +474,10 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
      }
      else{
        player.payJail();
-	   if(player.getMoney() < 0){
-		  return 5;
-	   }
+       if(player.getMoney() < 0){
+           return 5;
+       }
+       player.setInJail(false);
        return 0;
      }
    }
