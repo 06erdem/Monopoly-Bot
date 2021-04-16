@@ -26,4 +26,6 @@ public abstract class Tiles {
 	 public abstract boolean hasOwner();
  	 public abstract int getRent();
  	 public abstract int getRandom();
+	 public abstract int getOwner();
+	 public abstract int getValue();
 }

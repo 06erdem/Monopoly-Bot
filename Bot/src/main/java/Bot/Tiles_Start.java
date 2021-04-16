@@ -5,6 +5,7 @@ public class Tiles_Start extends Tiles {
   int rent = 0;
   int random = 0;
   String message;
+  int owner = 0;
   public Tiles_Start() {
     // TODO Auto-generated constructor stub
     type = 0;
@@ -12,7 +13,9 @@ public class Tiles_Start extends Tiles {
     emoji = ":green_circle:";
     message = "You are at the start! Press 'd' to roll the dice!";
   }
-
+  public int getOwner(){
+    return owner;
+  }
   public boolean hasOwner(){
     return hasOwner;
   }
@@ -28,11 +31,16 @@ public class Tiles_Start extends Tiles {
   int getReward() {
     return 200;
   }
+  public int getValue(){
+    return 0;
+  }
   public String toString() { return ":checkered_flag:"; }
+
   void setPast() {
 	  this.name = "Collect $200 as you pass!";
 	  message = "You're at the start! Collect $200!";
   }
+
   @Override
   public String getMessage(int playNum) {
 	  //TODO implement $200 bonus

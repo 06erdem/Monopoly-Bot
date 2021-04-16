@@ -34,7 +34,7 @@ public class Tiles_Property extends Tiles  {
  void freeOwner() {
   ownerNum = 4;
  }
- int getOwner() {
+ public int getOwner() {
   return ownerNum;
  }
  void setOwner(int newOwner) {
@@ -49,7 +49,7 @@ public class Tiles_Property extends Tiles  {
  boolean isMortgaged() {
   return isMortgaged;
  }
- int getValue(){
+ public int getValue(){
    return value;
  }
  

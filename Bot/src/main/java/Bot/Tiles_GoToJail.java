@@ -7,7 +7,7 @@ public class Tiles_GoToJail extends Tiles {
   boolean hasOwner = false;
   int rent = 0;
   int random = 0;
- 
+  int owner = 0;
  public Tiles_GoToJail(String emoji) {
   // TODO Auto-generated constructor stub
   name = "Go To Jail!";
@@ -29,6 +29,10 @@ public class Tiles_GoToJail extends Tiles {
   return 50;
  }
  
+ public int getOwner(){
+   return owner;
+ }
+	
  public boolean hasOwner(){
    return hasOwner;
  }
@@ -39,6 +43,10 @@ public class Tiles_GoToJail extends Tiles {
  
  public int getRandom(){
    return random;
+ }
+
+ public int getValue(){
+   return 0;
  }
  
  public String toString() { return ":passport_control:"; }

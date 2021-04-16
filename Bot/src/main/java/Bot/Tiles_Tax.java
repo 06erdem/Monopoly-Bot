@@ -4,6 +4,7 @@ public class Tiles_Tax extends Tiles {
  int tax;
  int random = 0;
  int rent = 0;
+ int owner = 0;
  boolean hasOwner = false;
  public Tiles_Tax(int tax) {
    name = "Tax";
@@ -20,7 +21,9 @@ public class Tiles_Tax extends Tiles {
  int getTax(){
    return tax;
  }
- 
+ public int getOwner(){
+   return owner;
+ }
  public boolean hasOwner(){
    return hasOwner;
  }
@@ -32,6 +35,9 @@ public class Tiles_Tax extends Tiles {
  public int getRandom(){
    return random;
  }
+ public int getValue(){
+  return 0;
+}
  
  void setTax(int t){
    tax = t;

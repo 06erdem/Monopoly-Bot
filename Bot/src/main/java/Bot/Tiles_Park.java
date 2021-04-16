@@ -19,12 +19,19 @@ public class Tiles_Park extends Tiles {
 		return 0;
 	}
 
-	@Override
-	public int getRandom() {
+	public int getOwner() {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 	@Override
 	public String getMessage(int playNum) {
 		return "Free Parking!";
 	}
+	@Override
+	public int getRandom(){
+		return 0;
+	}
+	public int getValue(){
+		return 0;
+	  }
 }
