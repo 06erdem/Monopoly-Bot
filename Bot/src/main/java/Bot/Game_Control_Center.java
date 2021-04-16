@@ -177,9 +177,16 @@ public class Game_Control_Center {
 							//Print message that a property was sold
 						}
 					}
+					if(board.tiles[0].name == "You are at the start!")
+						changeStart();
 					
 				}
-				if(input.equals("b")) { //To buy property
+				if(input.equals("b") && board.getCurrTile().getType() == 2) { //To buy property
+					if(board.getPlayer().getMoney() >= board.getCurrTile().getValue()) {
+						sendGenericEmbed(board.getPlayer().getEmoji() + "Bought " + board.getCurrTile().getName() + board.getCurrTile().getEmoji(),
+								"Congrats! You just bought this property for " + board.getCurrTile().getValue(), null);
+						board.getPlayer().buyProperty((Tiles_Property)board.getCurrTile(), board.getCurrPlayer());
+					}
 					
 				}
 				if(input.equals("r")) { //To rent
@@ -206,6 +213,19 @@ public class Game_Control_Center {
 			}
 			sendGenericEmbed("Player " + (i+1) + "Left!","Space is now available", null);
 		}
+	}
+	void changeStart() {//This will change the message at start if the player has passed it
+		int last = 0;
+		for(int i = 0; i < 4; i++)
+			if(board.playerList[i] != null)
+				last = i;
+		
+		if(last ==  board.getCurrPlayer()) {
+			board.tiles[0].name = "Collect $200 as you pass!";
+			board.tiles[0].message = "You're at the start! Collect $200!";
+		}
+
+		
 	}
 	public void printboard() {
 		int[] playerPositions = {40,40,40,40}; //all positions are set as non-existing

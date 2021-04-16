@@ -1,5 +1,4 @@
 package Bot;
-import java.lang.*;
 
 public class Tiles_Chance extends Tiles { 
  int min = -50;
