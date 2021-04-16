@@ -1,6 +1,6 @@
 package Bot;
 /* Parent class for all tiles of the board */
-public class Tiles {
+public abstract class Tiles {
 	/* contain the coordinate of the tile on the board */
 	//private int[] coordinate;
 	int type; //Type = ( 0=Nothing Specific/Parking ) (1=Start) (2=Property) (3=Jail) (4=Chance/Chest) (5=Tax)
@@ -22,6 +22,15 @@ public class Tiles {
 	int getType() {
 		return type;
 	}
+<<<<<<< HEAD
 	
 	public String toString() { return emoji;}
+=======
+	 public abstract String getMessage(int playNum);
+	 public abstract boolean hasOwner();
+ 	 public abstract int getRent();
+ 	 public abstract int getRandom();
+	 public abstract int getOwner();
+	 public abstract int getValue();
+>>>>>>> branch 'main' of https://github.com/LordChester64/CS321_Monopoly_Bot.git
 }

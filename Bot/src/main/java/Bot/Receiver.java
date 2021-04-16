@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class Receiver extends ListenerAdapter {
 	
+<<<<<<< HEAD
 	private Game_Control_Center controller = null;  
 	//private int startCommand = 0;
 	private EmbedBuilder embed;
@@ -15,20 +16,46 @@ public class Receiver extends ListenerAdapter {
 	private String content;
 	private MessageChannel channel;   //this variable is used to send message to the channel of the commands just entered
 	
+=======
+	private Game_Control_Center controller = new Game_Control_Center();  
+	//private int startCommand = 0;
+	private EmbedBuilder embed = new EmbedBuilder();
+	//private String resultMessage;     //result of an function in Controller, default is String "success"
+	private String content;
+	private MessageChannel channel;   //this variable is used to send message to the channel of the commands just entered
+>>>>>>> branch 'main' of https://github.com/LordChester64/CS321_Monopoly_Bot.git
 	@Override
 	public void onMessageReceived(MessageReceivedEvent e) {
 		//get message and channel of the message
 		content = e.getMessage().getContentRaw().toLowerCase();
 		channel = e.getChannel();
+<<<<<<< HEAD
 		String userID	= e.getAuthor().getId();
 		
 		if(content.equals("hi")) {
 			e.getChannel().sendMessage("what's up mate!").queue();
-		}
+=======
+		String userID = e.getAuthor().getId();
 		
+		
+		if(content.equals("!play") || ( (controller.getState() == 1 || controller.getState() == 2))) { // state = 1 means it is setting up the game and should take input 
+			controller.run(embed, channel, content, userID);                                          // state = 2 means the game is running and should take input
+>>>>>>> branch 'main' of https://github.com/LordChester64/CS321_Monopoly_Bot.git
+		}
+<<<<<<< HEAD
+		
+=======
+		if(content.equals("!commands")) {//I don't know why but this doesn't work
+			e.getChannel().sendMessage("Type \"!play\" to start the game!");
+		}
+		if(content.equals("hi")) {
+			e.getChannel().sendMessage("what's up mate!").queue();
+		}
+>>>>>>> branch 'main' of https://github.com/LordChester64/CS321_Monopoly_Bot.git
 		if(content.contains("!delete")) {
 			e.getChannel().purgeMessages(e.getChannel().getHistory().retrievePast(50).complete());
 		}
+<<<<<<< HEAD
 		
 		/* ACTIONS FOR INITIALIZNG THE GAME */
 		
@@ -44,7 +71,10 @@ public class Receiver extends ListenerAdapter {
 		
 		/* ACTIONS WHEN GAME IS RUNNING */
 		
+=======
+>>>>>>> branch 'main' of https://github.com/LordChester64/CS321_Monopoly_Bot.git
 	}
+<<<<<<< HEAD
 	
 	
 	private void play() {
@@ -80,6 +110,8 @@ public class Receiver extends ListenerAdapter {
 		channel.sendMessage(embed.build()).queue();
 	}
 	
+=======
+>>>>>>> branch 'main' of https://github.com/LordChester64/CS321_Monopoly_Bot.git
 	/* Used for constructing and sending generic embed message. 
 	 * If no title or footer is present, call the function with them as null: 
 	 * sendGenericEmbed(null, description, null); */
