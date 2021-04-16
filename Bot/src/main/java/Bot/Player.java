@@ -55,6 +55,7 @@ public class Player {
  void setPosition(int pos) { //Set position on board
   position = pos;
  }
+ 
  int getPosition() { //Get position on board
   return position;
  }
@@ -79,7 +80,7 @@ public class Player {
  }
  
  void buyProperty(Tiles_Property tile, int id) {
-  tile.setOwner = id;
+  tile.setOwner(id);
   propertiesOwned.add(tile);
   addMoney(-tile.getValue());
  }

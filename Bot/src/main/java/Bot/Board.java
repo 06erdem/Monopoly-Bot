@@ -458,6 +458,8 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
  }
 
  //return 0 if there is nothing the user can input after moving
+ //return 1 if the user can buy the property landed on
+ //return 2 if the user is out of money
  int movePosition(int dice1, int dice2, int playerID){
    int sum = dice1 + dice2;
    int index = playerID;
@@ -469,6 +471,9 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
      }
      else{
        player.payJail();
+	   if(player.getMoney() < 0){
+		  return 2;
+	   }
        return 0;
      }
    }
@@ -493,6 +498,9 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
      player.addMoney(-tiles[player.position].getRent());
      int playerId = tiles[player.position].getOwner();
      playerList[playerId].addMoney(tiles[player.position].getRent());
+	 if(player.getMoney() < 0){
+		 return 2;
+	 }
      return 0;
    }
    //RETURN 1 this means that the user has the option to buy this property
