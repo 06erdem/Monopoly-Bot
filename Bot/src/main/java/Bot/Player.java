@@ -94,11 +94,11 @@ public class Player {
   addMoney(-tile.getValue());
  }
  
-	void rentProperty(Tiles_Property tile) {
+	void rentProperty(Tiles tile) {
 		addMoney(-tile.getRent());
 	}
  
-	void collectRent(Tiles_Property tile){
+	void collectRent(Tiles tile){
 		addMoney(tile.getRent());
 	}
  

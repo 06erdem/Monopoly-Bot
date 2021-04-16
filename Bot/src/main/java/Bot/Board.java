@@ -122,7 +122,9 @@ public class Board {
  Tiles[] getTiles(){ //return the list of tiles that are used for the board
   return tiles;
  } 
-  
+ Tiles getCurrTile() {
+	 return tiles[playerList[getCurrPlayer()].getPosition()];
+ }
  void setTiles(Tiles[] tileList){ //set the tiles used for the board
   tiles = tileList;
  }
@@ -139,6 +141,9 @@ public class Board {
 	 while(playerList[currPlayer] == null)
 		 currPlayer++;
 	 return currPlayer;
+ }
+ Player getPlayer() {
+	 return playerList[getCurrPlayer()];
  }
 
  void setCurrPlayer(int newCurrPlayer){

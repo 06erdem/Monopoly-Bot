@@ -6,6 +6,7 @@ public abstract class Tiles {
 	int type; //Type = (0=Nothing Specific/Parking) (1=Start) (2=Property) (3=Jail) (4=Chance/Chest) (5=Tax)
 	String name; //Will hold name that the bot will print. i.e Old Kent Road, Community Chest, etc
 	String emoji = "";
+	String message;
 	public Tiles() {		
 	}
 	public Tiles(String name, int type, String emoji) {

@@ -4,7 +4,6 @@ public class Tiles_Start extends Tiles {
   boolean hasOwner = false;
   int rent = 0;
   int random = 0;
-  String message;
   int owner = 0;
   public Tiles_Start() {
     // TODO Auto-generated constructor stub
@@ -36,10 +35,6 @@ public class Tiles_Start extends Tiles {
   }
   public String toString() { return ":checkered_flag:"; }
 
-  void setPast() {
-	  this.name = "Collect $200 as you pass!";
-	  message = "You're at the start! Collect $200!";
-  }
 
   @Override
   public String getMessage(int playNum) {
