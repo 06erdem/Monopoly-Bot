@@ -78,6 +78,10 @@ public class Player {
  ArrayList<Tiles> getOwnedProperties(){ //get the properties owned by the player
    return propertiesOwned;
  }
+
+ int getNumProperties(){
+   return propertiesOwned.size();
+ }
  
  void buyProperty(Tiles_Property tile, int id) {
   tile.setOwner(id);

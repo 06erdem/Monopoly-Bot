@@ -130,6 +130,33 @@ public class Game_Control_Center {
 			//Functions for 
 			else if(gameState == 2 && board.playerList[board.getCurrPlayer()].getId().equals(userID)) {
 				if(input.equals("d")) { //To roll dice, command instructions will be given in the footer of each print board
+					Player currentPlayer = board.playerList[board.getCurrPlayer()];
+					int initialPosition = currentPlayer.getPosition();
+					int moveState = board.movePosition(0, 0, board.getCurrPlayer()); //TODO:Add dice call & dice values to movePosition call
+					if((initialPosition > currentPlayer.getPosition()) && (currentPlayer.getInJail() == false)){
+						//Print passing GO message
+					}
+					if(moveState == 1){
+						//Buy property message
+					}
+					if(moveState == 2){
+						if(board.getCurrPlayer() != board.tiles[currentPlayer.getPosition()].getOwner()){
+							currentPlayer.addMoney(-board.tiles[currentPlayer.getPosition()].getRent());
+     						int playerId = board.tiles[currentPlayer.getPosition()].getOwner();
+    						board.playerList[playerId].addMoney(board.tiles[currentPlayer.getPosition()].getRent());
+							if(currentPlayer.getMoney() < 0){
+								moveState = 3;
+							}
+						}
+					}
+					if(moveState == 3){
+						if(board.playerList[board.getCurrPlayer()].getNumProperties() == 0){
+							//Declare bankruptcy
+						}
+						else{
+							//Sell property
+						}
+					}
 					
 				}
 				if(input.equals("b")) { //To buy property
