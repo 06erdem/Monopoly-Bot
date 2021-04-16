@@ -29,10 +29,11 @@ public class Tiles_Property extends Tiles  {
    return random;
  }
  public boolean hasOwner() {
-  return ownerNum == 4;
+  return ownerNum != 4;
  }
  void freeOwner() {
   ownerNum = 4;
+  freeMortgaged();
  }
  public int getOwner() {
   return ownerNum;
@@ -75,10 +76,10 @@ public class Tiles_Property extends Tiles  {
 		 else if(playerNum == ownerNum)
 			 return "You are the owner of this property and can stay here rent free!\n";
 		 else
-			 return "This property is owned by player " + getOwner() + "pay rent to stay here or declare bankrupcy by typing 'bankrupt'";
+			 return "This property is owned by player " + getOwner() + " pay rent by pressing 'p' to stay here or declare bankrupcy by typing 'bankrupt'";
 	 }
-	 else {
-		 return "You can buy this property for $" + getValue() + "\nPress 'b' to make the purchase!"; 
+	 else { //Has no owner, can buy or skip
+		 return "You can buy this property for $" + getValue() + "\nPress 'b' to make the purchase or press 's' to skip."; 
 	 }
  }
 }

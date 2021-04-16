@@ -55,7 +55,7 @@ public class Tiles_Jail extends Tiles {
 			  message += "\nYou don't have enough funds to pay bail. So you either roll doubles or you're out!";
 	  }
 	  else
-		  message = "Jail! You are visiting so there's nothing much to do here...";
+		  message = "You're in jail. Press 'd' to roll your dice and get out.";
   }
 @Override
 public String getMessage(int playNum) {

@@ -132,14 +132,16 @@ public class Board {
  int getNumPlayers(){
   return numPlayers;
  }
-
  void setNumPlayers(int newNumPlayers){
   numPlayers = newNumPlayers;
  }
 
  int getCurrPlayer(){
-	 while(playerList[currPlayer] == null)
+	 while(playerList[currPlayer] == null) {
 		 currPlayer++;
+		 if(currPlayer > 3)
+		 	currPlayer = 0;
+	 }
 	 return currPlayer;
  }
  Player getPlayer() {
@@ -151,7 +153,8 @@ public class Board {
  }
  
  void goToNextPlayer() {
-	 for(int i = ++currPlayer; i < 4; i++) {
+	 ++currPlayer;
+	 for(int i = currPlayer; i < 4; i++) {
 		 if(currPlayer > 3)
 			 currPlayer = 0;
 		 if(playerList[currPlayer] != null)
@@ -465,24 +468,24 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
  //return 0 if there is nothing the user can input after moving
  //return 1 if the user can buy the property landed on
  //return 2 if the user landed on an owned tile
- //return 3 if the user is out of money
+ //return 3 if the user is out of money //Shouldn't this be 'chance' ?
  //return 4 if the user was sent to jail
- //return 5 if the user landed on chance
+ //return 5 if the user landed on chance //This is now functioning as in-jail, failed to roll double
  int movePosition(int dice1, int dice2, int playerID){
    int sum = dice1 + dice2;
    int index = playerID;
    Player player = playerList[index];
-   if(player.getInJail() == true){
-     if(dice1 == dice2){
+   if(player.getInJail() == true){ //if player is in jail, must pay or roll double
+     if(dice1 == dice2){ //if roll double, no longer in jail
        player.setInJail(false);
        return 0;
      }
-     else{
-       player.payJail();
-	   if(player.getMoney() < 0){
+     else{ //if there is no double, the player has to pay
+       //player.payJail();
+	   if(player.getMoney() < 50){ //IF the player doesn't have bail money, they are bankrupt
 		  return 5;
 	   }
-       return 0;
+       return 5;
      }
    }
    player.position = player.getPosition() + sum;
