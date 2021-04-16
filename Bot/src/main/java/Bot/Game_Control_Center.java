@@ -132,7 +132,9 @@ public class Game_Control_Center {
 				//moveState = 0 if there is nothing the user can input after moving
  				//moveState = 1 if the user can buy the property landed on
  				//moveState = 2 if the user landed on an owned tile
- 				//moveState = 3 if the user is out of money
+				//moveState = 3 if the user landed on chance
+				//moveState = 4 if the user was sent to jail
+				//moveState = 5 if the user is out of money
 				if(input.equals("d")) { //To roll dice, command instructions will be given in the footer of each print board
 					Player currentPlayer = board.playerList[board.getCurrPlayer()];
 					int initialPosition = currentPlayer.getPosition();
@@ -154,6 +156,13 @@ public class Game_Control_Center {
 						}
 					}
 					if(moveState == 3){
+						currentPlayer.addMoney(board.tiles[currentPlayer.getPosition()].getRandom());
+						//Print "Landed on chance" message
+					}
+					if(moveState == 4){
+						//Print "Sent to jail" message
+					}
+					if(moveState == 5){
 						if(board.playerList[board.getCurrPlayer()].getNumProperties() == 0){
 							//Declare bankruptcy
 						}

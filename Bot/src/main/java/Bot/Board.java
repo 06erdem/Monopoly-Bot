@@ -475,7 +475,7 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
      else{
        player.payJail();
 	   if(player.getMoney() < 0){
-		  return 3;
+		  return 5;
 	   }
        return 0;
      }
@@ -486,8 +486,7 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
      player.addMoney(200);
    }
    if(player.position ==2 || player.position == 7 || player.position == 22 || player.position ==33 || player.position == 37){
-     player.addMoney(tiles[player.position].getRandom());
-     return 5;
+     return 3;
    }
    if(player.position == 30){
      player.goToJail();
