@@ -146,6 +146,11 @@ public class Game_Control_Center {
 					}
 					if(moveState == 1){
 						//Buy property message
+						int pos = currentPlayer.position;
+						String name = board.tiles[pos].getName();
+						int amount = board.tiles;
+						sendGenericEmbed("Would you like to purchase " + name + "?",null);
+						
 					}
 					if(moveState == 2){
 						if(board.getCurrPlayer() != board.tiles[currentPlayer.getPosition()].getOwner()){
