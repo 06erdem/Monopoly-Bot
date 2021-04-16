@@ -505,11 +505,11 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
    //if player lands on property we want to give them an option to purchase
    //But how do we do this without user input for option to purchase
    if(tiles[player.position].hasOwner() == false){
-	 return 2;
+	 return 1;
    }
    //RETURN 1 this means that the user has the option to buy this property
    if(tiles[player.position].hasOwner() == true){
-     return 1;
+     return 2;
    }
    return 0;
 

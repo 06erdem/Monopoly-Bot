@@ -25,7 +25,7 @@ public class Tiles_Park extends Tiles {
 	}
 	@Override
 	public String getMessage(int playNum) {
-		return "Free Parking!";
+		return "Free Parking! Press 'd' to roll to dice.";
 	}
 	@Override
 	public int getRandom(){

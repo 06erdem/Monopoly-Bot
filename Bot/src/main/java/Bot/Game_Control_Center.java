@@ -120,7 +120,7 @@ public class Game_Control_Center {
 			
 			//Functions for running game
 			else if(input.equals("!start") && gameState == 1) {
-				if(board.numPlayers >= 2) {
+				if(board.numPlayers >= 1) {
 					gameState = 2;
 					printboard();
 				}
@@ -151,7 +151,7 @@ public class Game_Control_Center {
 					}
 					if(moveState == 1){
 						//Buy property message
-						printboard(); //If it is a property, doesn't move to next player.
+						printboard(); //If it is an un-bought property, offer to buy.
 					}
 					if(moveState == 2){ //If user landed on an owned tile
 						/*if(board.getCurrPlayer() != board.tiles[currentPlayer.getPosition()].getOwner()){
@@ -162,10 +162,18 @@ public class Game_Control_Center {
 								moveState = 3;
 							}
 						}*/
-						printboard(); //If the user landed on an owned tile, the program will want another input to buy, rent, etc.
+						if(board.getCurrTile().getOwner() != board.getCurrPlayer()) //If the current player is NOT the owner....
+							printboard(); //If the user landed on an owned tile, the program will want another input to buy, rent, etc.
+						else {
+							sendGenericEmbed("You own this tile", "You own this tile and can stay here rent free!", null);
+							board.goToNextPlayer();
+						}
 					}
-					if(moveState == 3){ //If the user landed on 'chance'
+					if(board.getCurrTile().getType() == 4/*moveState == 3*/){ //If the user landed on 'chance'
 						currentPlayer.addMoney(((Tiles_Chance)(board.getCurrTile())).getRandom());
+						if(currentPlayer.getMoney() < 0)
+							playerLose(board.getCurrPlayer());
+						board.goToNextPlayer();
 						printboard();
 						//Print "Landed on chance" message
 					}
@@ -198,6 +206,11 @@ public class Game_Control_Center {
 							printboard();
 								
 						}
+						if(board.getCurrTile().getType() == 0) { //If at park
+							board.goToNextPlayer();
+							printboard();
+						}
+							
 					}
 					if(board.tiles[0].name == "You are at the start!")
 						changeStart();
@@ -221,7 +234,7 @@ public class Game_Control_Center {
 					}
 				}
 				if(input.equals("s") && board.getCurrTile().getType() == 2 && !board.getCurrTile().hasOwner()) { //To skip property, checks if property and if has owner
-					board.goToNextPlayer();
+					board.goToNextPlayer(); //TODO need to fix moving to tile
 					printboard();
 				}
 				if(input.equals("r") && board.getCurrTile().getType() == 2 && board.getCurrTile().getOwner() != board.getCurrPlayer()) { //To rent, checks if property and isn't owner
