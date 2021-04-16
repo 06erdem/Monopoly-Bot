@@ -19,8 +19,8 @@ public class Tiles_Park extends Tiles {
 		return 0;
 	}
 
-	@Override
-	public int getRandom() {
+	public int getOwner() {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 	@Override
@@ -32,4 +32,7 @@ public class Tiles_Park extends Tiles {
 	public int getRandom(){
 		return 0;
 	}
+	public int getValue(){
+		return 0;
+	  }
 }

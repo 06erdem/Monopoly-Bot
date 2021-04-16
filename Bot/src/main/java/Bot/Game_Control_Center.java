@@ -129,7 +129,41 @@ public class Game_Control_Center {
 			}
 			//Functions for 
 			else if(gameState == 2 && board.playerList[board.getCurrPlayer()].getId().equals(userID)) {
+				//moveState = 0 if there is nothing the user can input after moving
+ 				//moveState = 1 if the user can buy the property landed on
+ 				//moveState = 2 if the user landed on an owned tile
+ 				//moveState = 3 if the user is out of money
 				if(input.equals("d")) { //To roll dice, command instructions will be given in the footer of each print board
+					Player currentPlayer = board.playerList[board.getCurrPlayer()];
+					int initialPosition = currentPlayer.getPosition();
+					int moveState = board.movePosition(1, 1, board.getCurrPlayer()); //TODO:Add dice call & dice values to movePosition call
+					if((initialPosition > currentPlayer.getPosition()) && (currentPlayer.getInJail() == false)){
+						//Print passing GO message
+					}
+					if(moveState == 1){
+						//Buy property message
+					}
+					if(moveState == 2){
+						if(board.getCurrPlayer() != board.tiles[currentPlayer.getPosition()].getOwner()){
+							currentPlayer.addMoney(-board.tiles[currentPlayer.getPosition()].getRent());
+     						int playerId = board.tiles[currentPlayer.getPosition()].getOwner();
+    						board.playerList[playerId].addMoney(board.tiles[currentPlayer.getPosition()].getRent());
+							if(currentPlayer.getMoney() < 0){
+								moveState = 3;
+							}
+						}
+					}
+					if(moveState == 3){
+						if(board.playerList[board.getCurrPlayer()].getNumProperties() == 0){
+							//Declare bankruptcy
+						}
+						else{
+							//Sell property
+							Tiles soldTile = currentPlayer.sellOwnedProperty();
+							currentPlayer.addMoney(soldTile.getValue());
+							//Print message that a property was sold
+						}
+					}
 					
 				}
 				if(input.equals("b")) { //To buy property

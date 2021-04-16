@@ -35,6 +35,9 @@ public class Tiles_Tax extends Tiles {
  public int getRandom(){
    return random;
  }
+ public int getValue(){
+  return 0;
+}
  
  void setTax(int t){
    tax = t;

@@ -55,6 +55,7 @@ public class Player {
  void setPosition(int pos) { //Set position on board
   position = pos;
  }
+ 
  int getPosition() { //Get position on board
   return position;
  }
@@ -76,6 +77,15 @@ public class Player {
  
  ArrayList<Tiles> getOwnedProperties(){ //get the properties owned by the player
    return propertiesOwned;
+ }
+
+ Tiles sellOwnedProperty(){
+    Tiles soldTile = propertiesOwned.remove(propertiesOwned.size() - 1);
+    return soldTile;
+ }
+
+ int getNumProperties(){
+   return propertiesOwned.size();
  }
  
  void buyProperty(Tiles_Property tile, int id) {
