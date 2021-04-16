@@ -120,7 +120,7 @@ public class Game_Control_Center {
 			
 			//Functions for running game
 			else if(input.equals("!start") && gameState == 1) {
-				if(board.numPlayers >= 1) {
+				if(board.numPlayers >= 2) {
 					gameState = 2;
 					printboard();
 				}
