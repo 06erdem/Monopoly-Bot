@@ -87,7 +87,6 @@ public class Board {
    else if(i==29)
     tiles[i] = new Tiles_Property(280, 120, "Marvin Gardens", ":homes:");
    else if(i==30) //Jail WITH action
-    //TO-DO: Action
     tiles[i] = new Tiles_GoToJail();
    else if(i==31)
     tiles[i] = new Tiles_Property(300, 130, "Pacific Avenue", ":classical_building:");
@@ -154,7 +153,7 @@ public class Board {
  
  void goToNextPlayer() {
 	 ++currPlayer;
-	 for(int i = currPlayer; i < 4; i++) {
+	 for(int i = currPlayer; i <= 4; i++) { // add = since if player is at 3, it break the loop since we pre-increment by 1.
 		 if(currPlayer > 3)
 			 currPlayer = 0;
 		 if(playerList[currPlayer] != null)
@@ -173,6 +172,7 @@ public class Board {
 	  playerList[position] = newPlayer;
 	  numPlayers++;
 	 }
+ 
  void removePlayer(int playerInd) {
 	 Player[] tempList = new Player[4];
 	 for(int i = 0; i < 4; i++)
@@ -524,4 +524,3 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
  }
  
 }
-

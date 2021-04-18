@@ -77,6 +77,7 @@ public class Game_Control_Center {
 		embed.setFooter(footer); // doesn't need to handle exception since setFooter accepts null
 		channel.sendMessage(embed.build()).queue();
 	}
+	
 	public void run(EmbedBuilder embed, MessageChannel channel, String input, String userID) {
 		this.embed = embed;
 		if(this.channel == null)
@@ -292,8 +293,7 @@ public class Game_Control_Center {
 				playerLose(board.getCurrPlayer());
 			//functions for testing
 			else if(input.contains("show"))
-				showPlayers();
-			
+				showPlayers();		
 		}
 		
 	}
@@ -325,7 +325,6 @@ public class Game_Control_Center {
 			board = new Board();
 			gameState = 3;
 		}
-		
 	}
 	public void printboard() {
 		if(board.getCurrTile().getType() == 3)
@@ -336,7 +335,7 @@ public class Game_Control_Center {
 				playerPositions[i] = board.playerList[i].getPosition();
 		String strBoard =  board.printBoard(playerPositions[0],playerPositions[1],playerPositions[2],playerPositions[3]);
 		String message = (board.tiles[board.playerList[board.getCurrPlayer()].getPosition()]).getMessage(board.currPlayer);
-		sendGenericEmbed(board.playerList[board.getCurrPlayer()].getEmoji() + " Player " + board.getCurrPlayer() + "'s Turn!\n" + ":moneybag:Money: " + board.playerList[board.getCurrPlayer()].getMoney(),
+		sendGenericEmbed(board.playerList[board.getCurrPlayer()].getEmoji() + " Player " + (board.getCurrPlayer() +1) + "'s Turn!\n" + ":moneybag:Money: " + board.playerList[board.getCurrPlayer()].getMoney(),
 				strBoard, message);
 	}
 	public void joinReceiver(String input, String userID) {
@@ -409,33 +408,3 @@ public class Game_Control_Center {
 		sendGenericEmbed("Showing Players:",ret,null);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
