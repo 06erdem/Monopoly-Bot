@@ -32,6 +32,9 @@ public class Receiver extends ListenerAdapter {
 		if(content.equals("hi")) {
 			e.getChannel().sendMessage("what's up mate!").queue();
 		}
+		
+		if(content.equals("bored") || content.equals("this game is the best") )
+			testEmbed();
 		if(content.contains("!delete")) {
 			e.getChannel().purgeMessages(e.getChannel().getHistory().retrievePast(50).complete());
 		}

@@ -5,17 +5,20 @@ public class Tiles_Jail extends Tiles {
   int random = 0;
   boolean hasOwner = false;
   int owner;
+  
   public Tiles_Jail() {
     // TODO Auto-generated constructor stub
     name = "Jail! No action";
     type = 2;
     emoji = ":passport_control:";
+    this.message = "If you are seeing this message, you did something wrong.";
   }
   public Tiles_Jail(String emoji) {
     // TODO Auto-generated constructor stub
     name = "Jail! No action";
     type = 2;
     this.emoji = emoji;
+    this.message = "If you are seeing this message, you did something wrong.";
   }
   
   void setName(String name) {
@@ -41,13 +44,23 @@ public class Tiles_Jail extends Tiles {
     return random;
   }
   public int getValue(){
-    return 0;
+    return 50;
   }
   public String toString() { return ":passport_control:"; }
+  
+  public void adjustMessage(Player p) {
+	  if(p.getInJail()) {
+		  message = "Press 'd' to try and roll double. If not, you will need to pay bail for $" + getValue();
+		  if(p.getMoney() < getValue())
+			  message += "\nYou don't have enough funds to pay bail. So you either roll doubles or you're out!";
+	  }
+	  else
+		  message = "You're in jail. Press 'd' to roll your dice and get out.";
+  }
 @Override
 public String getMessage(int playNum) {
 	// TODO Auto-generated method stub
-	return "Jail! You are visiting so there's nothing much to do here...";
+	return message;
 }
 
 }

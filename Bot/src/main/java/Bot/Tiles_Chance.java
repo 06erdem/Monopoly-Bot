@@ -1,5 +1,4 @@
 package Bot;
-import java.lang.*;
 
 public class Tiles_Chance extends Tiles { 
  int min = -50;
@@ -8,6 +7,7 @@ public class Tiles_Chance extends Tiles {
  int rent = 0;
  int owner = 0;
  boolean hasOwner = false;
+ int chance = 0;
  public Tiles_Chance() {
   name = "Chance Tile!";
   type = 4;
@@ -27,8 +27,9 @@ public class Tiles_Chance extends Tiles {
  public int getOwner(){
    return owner;
  }
- public int getRandom(){
-   return random;
+ public int getRandom(){ //Set maximum reward and deduction to 100
+   chance = (((int)(Math.random())%20) * 10) - 100;
+   return chance;
  }
  public boolean hasOwner(){
    return hasOwner;
@@ -47,7 +48,14 @@ public class Tiles_Chance extends Tiles {
 @Override
 public String getMessage(int playNum) {
 	// TODO Implement Chance!
-	return "You landed on a " + name + "\n" + getChance();
+	message = "You landed on a " + name + "\n";
+	if(chance > 0)
+		message += "You won $" + chance;
+	else if(chance < 0)
+		message += "Unlucky! You lost $" + chance;
+	else
+		message += "You didn't get anything...";
+	return message;
 }
  
 }

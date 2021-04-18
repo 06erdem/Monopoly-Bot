@@ -9,8 +9,9 @@ public abstract class Tiles {
 	String name; // Will hold name that the bot will print. i.e Old Kent Road, Community Chest,
 					// etc
 	String emoji = "";
+	String message;
+	public Tiles() {		
 
-	public Tiles() {
 	}
 
 	public Tiles(String name, int type, String emoji) {
