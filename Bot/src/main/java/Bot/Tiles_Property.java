@@ -6,6 +6,7 @@ public class Tiles_Property extends Tiles  {
  int rent;
  boolean isMortgaged = false;
  int random = 0;
+ 
  public Tiles_Property(int value, int rent, String name) {
   // TODO Auto-generated constructor stub
   ownerNum = 4; //Owner number = 4 can mean there is no owner. This removes need for boolean. Simple encapsulation.

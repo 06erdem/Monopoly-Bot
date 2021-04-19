@@ -5,7 +5,9 @@ import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+
 public class Receiver extends ListenerAdapter {
+	
 	
 	private Game_Control_Center controller = new Game_Control_Center();  
 	//private int startCommand = 0;
@@ -30,10 +32,23 @@ public class Receiver extends ListenerAdapter {
 		if(content.equals("hi")) {
 			e.getChannel().sendMessage("what's up mate!").queue();
 		}
+		
+		if(content.equals("bored") || content.equals("this game is the best") )
+			testEmbed();
 		if(content.contains("!delete")) {
 			e.getChannel().purgeMessages(e.getChannel().getHistory().retrievePast(50).complete());
 		}
 	}
+		/* ACTIONS WHEN GAME IS RUNNING */
+	
+	private void testEmbed() {
+		embed = new EmbedBuilder();
+		embed.setThumbnail("https://img.memecdn.com/computer-science-students-will-get-this_o_216650.jpg");
+		embed.setTitle("You found the Easter Egg !");
+		embed.setColor(0x527A00);
+		channel.sendMessage(embed.build()).queue();
+	}
+	
 	/* Used for constructing and sending generic embed message. 
 	 * If no title or footer is present, call the function with them as null: 
 	 * sendGenericEmbed(null, description, null); */
