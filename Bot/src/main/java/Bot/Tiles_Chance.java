@@ -28,7 +28,7 @@ public class Tiles_Chance extends Tiles {
    return owner;
  }
  public int getRandom(){ //Set maximum reward and deduction to 100
-   chance = (((int)(Math.random())%20) * 10) - 100;
+   chance = ((int)((Math.random())*20)*10)-100;
    return chance;
  }
  public boolean hasOwner(){

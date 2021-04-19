@@ -9,14 +9,14 @@ public class Tiles_Jail extends Tiles {
   public Tiles_Jail() {
     // TODO Auto-generated constructor stub
     name = "Jail! No action";
-    type = 2;
+    type = 3;
     emoji = ":passport_control:";
     this.message = "If you are seeing this message, you did something wrong.";
   }
   public Tiles_Jail(String emoji) {
     // TODO Auto-generated constructor stub
     name = "Jail! No action";
-    type = 2;
+    type = 3;
     this.emoji = emoji;
     this.message = "If you are seeing this message, you did something wrong.";
   }

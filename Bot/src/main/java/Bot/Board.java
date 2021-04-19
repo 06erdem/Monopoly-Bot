@@ -164,6 +164,7 @@ public class Board {
 	            currPlayer = 0;
 	        }
 	    }
+
  }
  
  void addPlayer(String playerId, String emoji){
@@ -401,6 +402,8 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
 	}
 	for(int i = 0; i < bottom; i++) {
 		strBoard += "\n";
+		for(int l = 0; l < left; l++)
+			strBoard += "⬛";
 		for(int j = 10; j >= 0; j--) {
 			if(j!= 0 && j!= 10 && j == a) {
 				strBoard += ":pickup_truck:";
@@ -480,6 +483,8 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
    if(tiles[player.position].hasOwner() == true){
      return 2;
    }
+   if(tiles[player.position].getType() == 5) //If landed on a tax tile, set inJail to true to not let player move until pay bail
+	   player.setInJail(true);
    return 0;
 
  }

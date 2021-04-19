@@ -6,6 +6,7 @@ public class Player {
 
  int position; //position on board
  int money; //money
+ int skippedTurn;
  ArrayList<Tiles> propertiesOwned; //properties owned by the player
  boolean inJail;
  String playerID;
@@ -14,6 +15,7 @@ public class Player {
  public Player(){
   position = 40;
   money = 1500;
+  skippedTurn = 0;
   propertiesOwned = new ArrayList<Tiles>();
   inJail = false;
  }
@@ -21,6 +23,7 @@ public class Player {
  public Player(String ID, String emojis){
   position = 0;
   money = 1500;
+  skippedTurn = 0;
   propertiesOwned = new ArrayList<Tiles>();
   inJail = false;
   playerID = ID;
@@ -60,6 +63,14 @@ public class Player {
   return position;
  }
  
+void setSkipped(int skipStatus){
+  skippedTurn = skipStatus;
+}
+
+int getSkipped(){
+  return skippedTurn;
+}
+
  void addMoney(int diff) { //Adds or subtracts given amount from player's money
   money += diff;
  }
@@ -95,22 +106,22 @@ void sellOwnedProperty(){
   addMoney(-tile.getValue());
  }
  
-	void rentProperty(Tiles tile) {
-		addMoney(-tile.getRent());
-	}
+void rentProperty(Tiles tile) {
+	addMoney(-tile.getRent());
+}
  
-	void collectRent(Tiles tile){
-		addMoney(tile.getRent());
-	}
+void collectRent(Tiles tile){
+	addMoney(tile.getRent());
+}
  
-	void payTax(Tiles_Tax tile) {
-		addMoney(-tile.getTax());
-	}
+void payTax(Tiles_Tax tile) {
+	addMoney(-tile.getTax());
+}
  
-	void payJail() {	
-		addMoney(-50);
-		inJail = false;
-	}
+void payJail() {	
+	addMoney(-50);
+	inJail = false;
+}
 	 //****Functions for tiles****//
 	 /*
  
