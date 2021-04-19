@@ -6,6 +6,7 @@ public class Player {
 
  int position; //position on board
  int money; //money
+ int skippedTurn;
  ArrayList<Tiles> propertiesOwned; //properties owned by the player
  boolean inJail;
  String playerID;
@@ -14,6 +15,7 @@ public class Player {
  public Player(){
   position = 40;
   money = 1500;
+  skippedTurn = 0;
   propertiesOwned = new ArrayList<Tiles>();
   inJail = false;
  }
@@ -21,6 +23,7 @@ public class Player {
  public Player(String ID, String emojis){
   position = 0;
   money = 1500;
+  skippedTurn = 0;
   propertiesOwned = new ArrayList<Tiles>();
   inJail = false;
   playerID = ID;
@@ -60,6 +63,14 @@ public class Player {
   return position;
  }
  
+void setSkipped(int skipStatus){
+  skippedTurn = skipStatus;
+}
+
+int getSkipped(){
+  return skippedTurn;
+}
+
  void addMoney(int diff) { //Adds or subtracts given amount from player's money
   money += diff;
  }
