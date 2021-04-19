@@ -48,7 +48,7 @@ public class Player {
  
  void goToJail(){
    inJail = true;
-   position = 11;
+   position = 10;
  }
  
  boolean getInJail(){

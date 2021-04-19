@@ -104,7 +104,7 @@ public class Game_Control_Center {
 				else if(gameState == 0 || gameState == 3) //If there is no running state
 					sendGenericEmbed(null, "You haven't started a game.",null);
 				else if(gameState == 2) //if the game is already running
-					sendGenericEmbed(null, "Can't join running game.",null);
+					sendGenericEmbed("FAIL", "Can't join running game.",null);
 			}
 			else if(input.equals("!leave")) {
 				leaveGame(userID);
@@ -136,14 +136,27 @@ public class Game_Control_Center {
 				//moveState = 3 if the user landed on chance
 				//moveState = 4 if the user was sent to jail
 				//moveState = 5 if the user is out of money
-				if(input.equals("d")) { //To roll dice, command instructions will be given in the footer of each print board
+				if(input.equals("d") || input.contains("d ")) { //To roll dice, command instructions will be given in the footer of each print board
 					Player currentPlayer = board.playerList[board.getCurrPlayer()];
 					int initialPosition = currentPlayer.getPosition();
 					String diceOutput = board.rollDice();
      				String[] dice = diceOutput.split(" ");
      				int dice1 = Integer.parseInt(dice[0]);
      				int dice2 = Integer.parseInt(dice[1]);
-					int moveState = board.movePosition(dice1, dice2, board.getCurrPlayer()); //TODO:Add dice call & dice values to movePosition call
+     				String[] spl = {null,null};
+     				if(input.contains("d ")) {
+     					spl = input.split(" ");
+     					if(spl[1] != null) {
+     						dice1 = Integer.parseInt(spl[1]);
+     						dice2 = Integer.parseInt(spl[2]);
+     					}
+     				}
+					int moveState = board.movePosition(dice1, dice2, board.getCurrPlayer());
+					if(board.getCurrTile().getType() == 0) { //If at 
+						sendGenericEmbed("Free parking!", "<@"+board.getPlayer().getId()+"> You landed on free parking!",null);
+						board.goToNextPlayer();
+						//printboard();
+					}
 					if(board.getCurrTile().getType() == 3) { //If the player is in jail
 						((Tiles_Jail)(board.getCurrTile())).adjustMessage(currentPlayer);
 					}
@@ -173,6 +186,9 @@ public class Game_Control_Center {
 					}
 					if(moveState == 4){
 						//Print "Sent to jail" message
+						sendGenericEmbed("Player " + (int)(board.getCurrPlayer()+1) + " went to jail!", "<@"+board.getPlayer().getId()+"> You were taken to jail!",null);
+						board.goToNextPlayer();
+						printboard();
 					}
 					if(moveState == 5){ //If the player couldn't roll double...
 						if(board.playerList[board.getCurrPlayer()].getNumProperties() == 0 && board.getPlayer().getMoney() < 50){
@@ -200,11 +216,11 @@ public class Game_Control_Center {
 							printboard();
 								
 						}
-						if(board.getCurrTile().getType() == 0) { //If at park
-							board.goToNextPlayer();
-							printboard();
-						}
 							
+					}
+					if(moveState == 6) {
+						board.goToNextPlayer();
+						printboard();
 					}
 					if(board.tiles[0].name == "You are at the start!")
 						changeStart();
@@ -284,7 +300,7 @@ public class Game_Control_Center {
 					}
 				}
 				if(input.equals("bankrupt")) {
-					sendGenericEmbed(board.getPlayer().getEmoji() + "Player " + board.getCurrPlayer()+1 + " declared bankrupcy!", "<@" + board.getPlayer().getId() + "> you are out of the game!", null);
+					sendGenericEmbed(board.getPlayer().getEmoji() + "Player " + (int)(board.getCurrPlayer()+1) + " declared bankrupcy!", "<@" + board.getPlayer().getId() + "> you are out of the game!", null);
 					playerLose(board.getCurrPlayer());
 					board.goToNextPlayer();
 					board.printBoard();
@@ -331,7 +347,7 @@ public class Game_Control_Center {
 	public void playerLose(int playerInd) {
 		board.removePlayer(playerInd);
 		if(board.getNumPlayers() == 1) {
-			sendGenericEmbed(board.getPlayer().getEmoji()+"Congrats Player "+board.getCurrPlayer()+"!", "<@"+board.getPlayer().getId() + "You've won the game!:champagne:", "The game is now over. Press !play to start again");
+			sendGenericEmbed(board.getPlayer().getEmoji()+"Congrats Player "+board.getCurrPlayer()+"!", "<@"+board.getPlayer().getId() + "> You've won the game!:champagne:", "The game is now over. Press !play to start again");
 			board = new Board();
 			gameState = 3;
 		}
@@ -355,7 +371,7 @@ public class Game_Control_Center {
 		else{
 			message = (board.tiles[board.playerList[board.getCurrPlayer()].getPosition()]).getMessage(board.currPlayer);
 		}
-		sendGenericEmbed(board.playerList[board.getCurrPlayer()].getEmoji() + " Player " + (board.getCurrPlayer() +1) + "'s Turn!\n" + ":moneybag:Money: " + board.playerList[board.getCurrPlayer()].getMoney(),
+		sendGenericEmbed(board.playerList[board.getCurrPlayer()].getEmoji() + " Player " + (int)(board.getCurrPlayer() +1) + "'s Turn!\n" + ":moneybag:Money: " + board.playerList[board.getCurrPlayer()].getMoney(),
 				strBoard, message);
 	}
 	public void joinReceiver(String input, String userID) {
