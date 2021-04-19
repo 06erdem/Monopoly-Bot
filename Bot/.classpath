@@ -23,6 +23,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/eclipse-workspace/JDA-4.2.0_241.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/org_junit_platform_junit-platform-console-standalone_1.6.0_junit-platform-console-standalone-1.6.0.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/JDA-4.2.1_253-withDependencies.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

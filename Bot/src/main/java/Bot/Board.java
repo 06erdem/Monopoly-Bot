@@ -164,6 +164,7 @@ public class Board {
 	            currPlayer = 0;
 	        }
 	    }
+
  }
  
  void addPlayer(String playerId, String emoji){

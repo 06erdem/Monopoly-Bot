@@ -227,6 +227,7 @@ public class Game_Control_Center {
 					}
 				}
 				if(input.equals("s") && board.getCurrTile().getType() == 2 && !board.getCurrTile().hasOwner()) { //To skip property, checks if property and if has owner
+					board.getPlayer().setSkipped(1);
 					board.goToNextPlayer(); //TODO need to fix moving to tile
 					printboard();
 				}
@@ -298,6 +299,7 @@ public class Game_Control_Center {
  				int pos4 = Integer.parseInt(teleArr[4]);
 				sendGenericEmbed("Teleport", board.printBoard(pos1,pos2,pos3,pos4),null);
 			}
+
 		}
 		
 	}
@@ -331,6 +333,7 @@ public class Game_Control_Center {
 		}
 	}
 	public void printboard() {
+		String message = "";
 		if(board.getCurrTile().getType() == 3)
 			((Tiles_Jail)board.getCurrTile()).adjustMessage(board.getPlayer());
 		int[] playerPositions = {40,40,40,40}; //all positions are set as non-existing
@@ -338,7 +341,14 @@ public class Game_Control_Center {
 			if(board.playerList[i] != null)
 				playerPositions[i] = board.playerList[i].getPosition();
 		String strBoard =  board.printBoard(playerPositions[0],playerPositions[1],playerPositions[2],playerPositions[3]);
-		String message = (board.tiles[board.playerList[board.getCurrPlayer()].getPosition()]).getMessage(board.currPlayer);
+
+		if(board.getPlayer(). getSkipped() == 1){
+			message = "Press 'd' to roll dice!";
+			board.getPlayer().setSkipped(0);
+		}
+		else{
+			message = (board.tiles[board.playerList[board.getCurrPlayer()].getPosition()]).getMessage(board.currPlayer);
+		}
 		sendGenericEmbed(board.playerList[board.getCurrPlayer()].getEmoji() + " Player " + (board.getCurrPlayer() +1) + "'s Turn!\n" + ":moneybag:Money: " + board.playerList[board.getCurrPlayer()].getMoney(),
 				strBoard, message);
 	}
