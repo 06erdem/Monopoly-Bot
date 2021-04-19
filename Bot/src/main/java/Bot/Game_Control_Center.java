@@ -237,7 +237,7 @@ public class Game_Control_Center {
 						board.getPlayer().rentProperty((Tiles_Property)board.getCurrTile());
 						board.playerList[board.getCurrTile().getOwner()].collectRent(board.getCurrTile());
 						sendGenericEmbed(board.getPlayer().getEmoji() + "You just paid rent on " + board.getCurrTile().getName() + board.getCurrTile().getEmoji(),
-								"Congrats! You just paid player "+board.getCurrTile().getOwner()+1+" $" + board.getCurrTile().getRent() + " rent for " + board.getCurrTile().getName(), 
+								"Congrats! You just paid player "+((int)(board.getCurrTile().getOwner()+1))+" $" + board.getCurrTile().getRent() + " rent for " + board.getCurrTile().getName(), 
 								"New bank balance: $" + board.getPlayer().getMoney());
 						board.goToNextPlayer();
 						printboard();						
