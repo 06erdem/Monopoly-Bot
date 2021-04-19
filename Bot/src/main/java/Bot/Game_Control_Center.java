@@ -155,14 +155,6 @@ public class Game_Control_Center {
 						printboard(); //If it is an un-bought property, offer to buy.
 					}
 					if(moveState == 2){ //If user landed on an owned tile
-						/*if(board.getCurrPlayer() != board.tiles[currentPlayer.getPosition()].getOwner()){
-							currentPlayer.addMoney(-board.tiles[currentPlayer.getPosition()].getRent());
-     						int playerId = board.tiles[currentPlayer.getPosition()].getOwner();
-    						board.playerList[playerId].addMoney(board.tiles[currentPlayer.getPosition()].getRent());
-							if(currentPlayer.getMoney() < 0){
-								moveState = 3;
-							}
-						}*/
 						if(board.getCurrTile().getOwner() != board.getCurrPlayer()) //If the current player is NOT the owner....
 							printboard(); //If the user landed on an owned tile, the program will want another input to buy, rent, etc.
 						else {
@@ -290,11 +282,24 @@ public class Game_Control_Center {
 				
 				
 			}
-			else if(input.equals("bankrupt"))
+			else if(input.equals("bankrupt")) {
 				playerLose(board.getCurrPlayer());
+				board.goToNextPlayer();
+				board.printBoard();
+			}
 			//functions for testing
 			else if(input.contains("show"))
 				showPlayers();		
+			else if(input.contains("teleport")) {
+				String tele = input;
+ 				String[] teleArr = tele.split(" ");
+ 				int pos1 = Integer.parseInt(teleArr[1]);
+ 				int pos2 = Integer.parseInt(teleArr[2]);
+ 				int pos3 = Integer.parseInt(teleArr[3]);
+ 				int pos4 = Integer.parseInt(teleArr[4]);
+				sendGenericEmbed("Teleport", board.printBoard(pos1,pos2,pos3,pos4),null);
+			}
+
 		}
 		
 	}
@@ -336,6 +341,7 @@ public class Game_Control_Center {
 			if(board.playerList[i] != null)
 				playerPositions[i] = board.playerList[i].getPosition();
 		String strBoard =  board.printBoard(playerPositions[0],playerPositions[1],playerPositions[2],playerPositions[3]);
+
 		if(board.getPlayer(). getSkipped() == 1){
 			message = "Press 'd' to roll dice!";
 			board.getPlayer().setSkipped(0);
@@ -412,7 +418,7 @@ public class Game_Control_Center {
 		String ret = "";
 		for(Player p: board.getPlayerList())
 			if(p != null)
-				ret += p.getEmoji() + " ID: " + p.getId();
+				ret += p.getEmoji() + " ID: " + p.getId() + "\nPosition: " + p.getPosition();
 		sendGenericEmbed("Showing Players:",ret,null);
 	}
 }

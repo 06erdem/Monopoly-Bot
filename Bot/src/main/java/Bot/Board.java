@@ -1,5 +1,7 @@
 package Bot;
 
+import java.util.ArrayList;
+
 public class Board {
  Tiles[] tiles; //array of tiles
  Player[] playerList; //list of players currently playing the game
@@ -152,14 +154,17 @@ public class Board {
  }
  
  void goToNextPlayer() {
-	 ++currPlayer;
-	 for(int i = currPlayer; i <= 4; i++) { // add = since if player is at 3, it break the loop since we pre-increment by 1.
-		 if(currPlayer > 3)
-			 currPlayer = 0;
-		 if(playerList[currPlayer] != null)
-			 break;
-	 }
-		 
+	    currPlayer++;
+	    if(currPlayer > 3){
+	        currPlayer = 0;
+	     } 
+	    while(playerList[currPlayer] == null){ // add = since if player is at 3, it break the loop since we pre-increment by 1.
+	        currPlayer++;
+	        if(currPlayer > 3){
+	            currPlayer = 0;
+	        }
+	    }
+
  }
  
  void addPlayer(String playerId, String emoji){
@@ -210,70 +215,35 @@ public class Board {
   
   return strBoard;
  }
- private int calcSpace(int[] ind, int pos) { // (Top = pos = 0) (bottom = pos = 1) (right = pos = 2) (left = pos = 3)
-	 int ans = 0;
-	 if(pos == 0) { //TOP
-		for(int i = 0; i < 4; i++) {
-			if(ans == 0 && ind[i]<30 && ind[i] > 20) {
-			if(ind[i]== ind[0])
-				ans++;
-			if(ind[i]==ind[1])
-					ans++;
-				if(ind[i]==ind[2])
-					ans++;
-				if(ind[i]==ind[3])
-					ans++;
-				break;
-			}
-		}
-	}
-	else if(pos==1) { //BOTTOM
-		for(int i = 0; i < 4; i++) {
-			if(ans == 0 && ind[i]<10 && ind[i] > 0) {
-				if(ind[i]== ind[0])
-					ans++;
-				if(ind[i]==ind[1])
-					ans++;
-				if(ind[i]==ind[2])
-					ans++;
-				if(ind[i]==ind[3])
-					ans++;
-				break;
-			}
-		}
-	}
-	else if(pos==2) { //RIGHT
-		for(int i = 0; i < 4; i++) {
-			if(ans == 0 && ind[i]>=30 && ind[i] <= 39) {
-				if(ind[i]== ind[0])
-					ans++;
-				if(ind[i]==ind[1])
-					ans++;
-				if(ind[i]==ind[2])
-					ans++;
-				if(ind[i]==ind[3])
-					ans++;
-				break;
-			}
-		}
-	}
-	else if(pos==3) { //LEFT
-		for(int i = 0; i < 4; i++) {
-			if(ans == 0 && ind[i]<=20 && ind[i] >= 10) {
-				if(ind[i]== ind[0])
-					ans++;
-				if(ind[i]==ind[1])
-					ans++;
-				if(ind[i]==ind[2])
-					ans++;
-				if(ind[i]==ind[3])
-					ans++;
-				break;
-			}
-		}
-	}
-	return ans;
-}
+ 
+ private int calcSpace(int[] ind, int pos) {
+	 ArrayList<Integer> arr = new ArrayList<Integer>();
+	 ArrayList<Integer> diff = new ArrayList<Integer>();
+	 for(int i = 0; i < 4; i ++) { //TOP
+		 if(pos == 0 && ind[i]<30 && ind[i] > 20) { //TOP
+				 arr.add(ind[i]);
+		 }
+		 else if(pos == 1 && ind[i]<10 && ind[i] > 0) { //BOTTOM
+				 arr.add(ind[i]);
+		 }
+		 else if(pos == 2 && ind[i]>=30 && ind[i] <= 39) { //RIGHT
+				 arr.add(ind[i]);
+		 }
+		 else if(pos == 3 && ind[i]<=20 && ind[i] >= 10) { //LEFT
+				 arr.add(ind[i]);
+		 }
+	 }
+	 for(int i = 0; i < arr.size(); i++) {
+		 if(diff.contains(arr.get(i)) == false) {
+			 diff.add(arr.get(i));
+		 }
+	 }
+	 if(arr.size() == 0)
+		 return 0;
+	 else
+		 return arr.size() + 1 - diff.size();
+	 
+ }
 String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't exist
 	String strBoard = "";
 	int[] arr = {a,b,c,d};
