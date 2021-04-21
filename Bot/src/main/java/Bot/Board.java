@@ -448,16 +448,13 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
    int sum = dice1 + dice2;
    int index = playerID;
    Player player = playerList[index];
-   if(tiles[player.position].getType() == 5) { //If landed on a tax tile, set inJail to true to not let player move until pay bail
-	   player.setInJail(true);
-	   return 0;
-   }
-   if(player.getInJail() == true){ //if player is in jail, must pay or roll double
+   
+   if(player.getInJail() == true && getCurrTile().getType() == 3){ //if player is in jail, must pay or roll double
      if(dice1 == dice2){ //if roll double, no longer in jail
        player.setInJail(false);
        return 6;
      }
-     else{ //if there is no double, the player has to pay
+     else { //if there is no double, the player has to pay
        //player.payJail();
 	   if(player.getMoney() < 50){ //IF the player doesn't have bail money, they are bankrupt
 		  return 5;
@@ -466,9 +463,15 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
      }
    }
    player.position = player.getPosition() + sum;
+   
+   
    if(player.position > 39){
      player.position -= 39;
      player.addMoney(200);
+   }
+   if(tiles[getPlayer().getPosition()].getType() == 5) { //If landed on a tax tile, set inJail to true to not let player move until pay bail
+	   player.setInJail(true);
+	   return 0;
    }
    if(player.position ==2 || player.position == 7 || player.position == 22 || player.position ==33 || player.position == 37){
      return 3;
@@ -486,6 +489,7 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
    }
    //RETURN 1 this means that the user has the option to buy this property
    if(tiles[player.position].hasOwner() == true){
+	  player.setInJail(true);
      return 2;
    }
    if(tiles[player.position].getType() == 5) //If landed on a tax tile, set inJail to true to not let player move until pay bail

@@ -6,6 +6,7 @@ public class Tiles_Property extends Tiles  {
  int rent;
  boolean isMortgaged = false;
  int random = 0;
+ String message;
  
  public Tiles_Property(int value, int rent, String name) {
   // TODO Auto-generated constructor stub
@@ -15,6 +16,7 @@ public class Tiles_Property extends Tiles  {
   this.rent = rent;
   this.name = name;
   emoji = ":house:";
+  message = "error";
  }
  public Tiles_Property(int value, int rent, String name, String emoji) {
   // TODO Auto-generated constructor stub
@@ -24,6 +26,7 @@ public class Tiles_Property extends Tiles  {
   this.rent = rent;
   this.name = name;
   this.emoji = emoji;
+  message = "error";
  }
  
  public int getRandom(){
@@ -70,19 +73,32 @@ public class Tiles_Property extends Tiles  {
   this.name = name;
  }
  public String toString() { return ":classical_building:"; }
- public String getMessage(int playerNum) {
+ public void adjustMessage(Player p) {
+	 boolean isOwner = false;
+	 for(Tiles t: p.propertiesOwned)
+		 if(t.equals(this))
+			 isOwner = true;
 	 if(hasOwner()) {
 		 if(isMortgaged())
-			 return "This property is mortgaged. You can stay here rent free!\n";
-		 else if(playerNum == ownerNum)
-			 return "You are on your own property. Press 'd' to roll dice!\n";
-		 else {
-			 int num = getOwner() + 1;
-			 return "This property is owned by player " + num + " pay rent by pressing 'r' to stay here or declare bankrupcy by typing 'bankrupt'";
+			 message = "This property is mortgaged. You can stay here rent free!\n";
+		 else if(isOwner)
+			 message = "You are on your own property. Press 'd' to roll dice!\n";
+		 else { //if has to pay rent OR has paid rent and can move on
+			 if(p.getInJail()) {
+				 int num = getOwner() + 1;
+				 message = "This property is owned by player " + num + " pay rent by pressing 'r' to stay here or declare bankrupcy by typing 'bankrupt'";
+			 }
+			 else
+				 message = "Press 'd' to roll dice!";
 		 }
 	 }
 	 else { //Has no owner, can buy or skip
-		 return "You can buy this property for $" + getValue() + "\nPress 'b' to make the purchase or press 's' to skip."; 
+		 message = "You can buy this property for $" + getValue() + "\nPress 'b' to make the purchase or press 's' to skip."; 
 	 }
+	 
  }
+ public String getMessage(int playerNum) {
+	 return message;
+ }
+ 
 }
