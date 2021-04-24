@@ -48,7 +48,7 @@ public class Player {
  
  void goToJail(){
    inJail = true;
-   position = 11;
+   position = 10;
  }
  
  boolean getInJail(){
@@ -106,22 +106,22 @@ void sellOwnedProperty(){
   addMoney(-tile.getValue());
  }
  
-	void rentProperty(Tiles tile) {
-		addMoney(-tile.getRent());
-	}
+void rentProperty(Tiles tile) {
+	addMoney(-tile.getRent());
+}
  
-	void collectRent(Tiles tile){
-		addMoney(tile.getRent());
-	}
+void collectRent(Tiles tile){
+	addMoney(tile.getRent());
+}
  
-	void payTax(Tiles_Tax tile) {
-		addMoney(-tile.getTax());
-	}
+void payTax(Tiles_Tax tile) {
+	addMoney(-tile.getTax());
+}
  
-	void payJail() {	
-		addMoney(-50);
-		inJail = false;
-	}
+void payJail() {	
+	addMoney(-50);
+	inJail = false;
+}
 	 //****Functions for tiles****//
 	 /*
  

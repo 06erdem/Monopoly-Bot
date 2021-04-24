@@ -402,6 +402,8 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
 	}
 	for(int i = 0; i < bottom; i++) {
 		strBoard += "\n";
+		for(int l = 0; l < left; l++)
+			strBoard += "⬛";
 		for(int j = 10; j >= 0; j--) {
 			if(j!= 0 && j!= 10 && j == a) {
 				strBoard += ":pickup_truck:";
@@ -441,16 +443,17 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
  //return 3 if the user is out of money //Shouldn't this be 'chance' ?
  //return 4 if the user was sent to jail
  //return 5 if the user landed on chance //This is now functioning as in-jail, failed to roll double
+ //return 6 if player paid bail
  int movePosition(int dice1, int dice2, int playerID){
    int sum = dice1 + dice2;
    int index = playerID;
    Player player = playerList[index];
-   if(player.getInJail() == true){ //if player is in jail, must pay or roll double
+   if(player.getInJail() == true && getCurrTile().getType() == 3){ //if player is in jail, must pay or roll double
      if(dice1 == dice2){ //if roll double, no longer in jail
        player.setInJail(false);
-       return 0;
+       return 6;
      }
-     else{ //if there is no double, the player has to pay
+     else { //if there is no double, the player has to pay
        //player.payJail();
 	   if(player.getMoney() < 50){ //IF the player doesn't have bail money, they are bankrupt
 		  return 5;
@@ -462,6 +465,11 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
    if(player.position > 39){
      player.position -= 39;
      player.addMoney(200);
+   }
+
+   if(tiles[getPlayer().getPosition()].getType() == 5) { //If landed on a tax tile, set inJail to true to not let player move until pay bail
+	   player.setInJail(true);
+	   return 0;
    }
    if(player.position ==2 || player.position == 7 || player.position == 22 || player.position ==33 || player.position == 37){
      return 3;
@@ -479,8 +487,12 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
    }
    //RETURN 1 this means that the user has the option to buy this property
    if(tiles[player.position].hasOwner() == true){
+
+	  player.setInJail(true);
      return 2;
    }
+   if(tiles[player.position].getType() == 5) //If landed on a tax tile, set inJail to true to not let player move until pay bail
+	   player.setInJail(true);
    return 0;
 
  }
