@@ -47,15 +47,7 @@ public class Tiles_Chance extends Tiles {
 
 @Override
 public String getMessage(int playNum) {
-	// TODO Implement Chance!
-	message = "You landed on a " + name + "\n";
-	if(chance > 0)
-		message += "You won $" + chance;
-	else if(chance < 0)
-		message += "Unlucky! You lost $" + chance;
-	else
-		message += "You didn't get anything...";
-	return message;
+	return "press 'd' to roll dice!";
 }
  
 }
