@@ -47,6 +47,7 @@ public class Receiver extends ListenerAdapter {
 		embed.setTitle("You found the Easter Egg !");
 		embed.setColor(0x527A00);
 		channel.sendMessage(embed.build()).queue();
+		embed.setThumbnail(null);
 	}
 	
 	/* Used for constructing and sending generic embed message. 
@@ -63,12 +64,3 @@ public class Receiver extends ListenerAdapter {
 		channel.sendMessage(embed.build()).queue();
 	}
 }
-
-
-
-
-
-
-
-
-
