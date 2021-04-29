@@ -20,7 +20,7 @@ public class Tiles_Chance extends Tiles {
   this.name = name;
   type = 4;
   this.emoji = emoji;
-  random = (int)Math.floor(Math.random()*(max-min+1)+min);
+  //random = (int)Math.floor(Math.random()*(max-min+1)+min);
   hasOwner = false;
   rent = 0;
  }
@@ -37,9 +37,6 @@ public class Tiles_Chance extends Tiles {
  public int getRent(){
    return rent;
  }
- public String getChance() {
-	 return "";
- }
 
  public int getValue(){
   return 0;
@@ -47,7 +44,8 @@ public class Tiles_Chance extends Tiles {
 
 @Override
 public String getMessage(int playNum) {
-	return "press 'd' to roll dice!";
+	message =  "Press 'd' to roll dice!";
+	return message;
 }
  
 }
