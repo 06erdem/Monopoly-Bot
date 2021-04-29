@@ -4,7 +4,7 @@ public class Tiles_GoToJail extends Tiles {
 	// TODO Auto-generated constructor stub
 
 	String name = "Go To Jail!";
-	int type = 2;
+	int type = 3;
 	boolean hasOwner = false;
 	int rent = 0;
 	int random = 0;
@@ -13,14 +13,14 @@ public class Tiles_GoToJail extends Tiles {
 	public Tiles_GoToJail(String emoji) {
 		// TODO Auto-generated constructor stub
 		name = "Go To Jail!";
-		type = 2;
+		type = 3;
 		this.emoji = ":passport_control:";
 	}
 
 	public Tiles_GoToJail() {
 		// TODO Auto-generated constructor stub
 		name = "Go To Jail!";
-		type = 2;
+		type = 3;
 		this.emoji = ":passport_control:";
 	}
 
