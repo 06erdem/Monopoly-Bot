@@ -444,10 +444,12 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
  //return 4 if the user was sent to jail
  //return 5 if the user landed on chance //This is now functioning as in-jail, failed to roll double
  //return 6 if player paid bail
+ //reuturn 7 if tax
  int movePosition(int dice1, int dice2, int playerID){
    int sum = dice1 + dice2;
    int index = playerID;
    Player player = playerList[index];
+   
    if(player.getInJail() == true && getCurrTile().getType() == 3){ //if player is in jail, must pay or roll double
      if(dice1 == dice2){ //if roll double, no longer in jail
        player.setInJail(false);
@@ -461,19 +463,26 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
        return 5;
      }
    }
+   
    player.position = player.getPosition() + sum;
+   
    if(player.position > 39){
      player.position -= 39;
      player.addMoney(200);
    }
-
+   
+   if(getCurrTile().getType() == 5) {
+	   player.setInJail(true);
+	   return 7;
+   }
    if(tiles[getPlayer().getPosition()].getType() == 5) { //If landed on a tax tile, set inJail to true to not let player move until pay bail
 	   player.setInJail(true);
 	   return 0;
    }
-   if(player.position ==2 || player.position == 7 || player.position == 22 || player.position ==33 || player.position == 37){
+   //if(player.position ==2 || player.position == 7 || player.position == 22 || player.position ==33 || player.position == 37){
+   if(getCurrTile().getType() == 4)
      return 3;
-   }
+   
    if(player.position == 30){
      player.goToJail();
      return 4;
@@ -482,12 +491,12 @@ String printBoard(int a, int b, int c, int d) { //Integer = 40 if player doesn't
    
    //if player lands on property we want to give them an option to purchase
    //But how do we do this without user input for option to purchase
-   if(tiles[player.position].hasOwner() == false){
+   if(getCurrTile().getType() == 2 && tiles[player.position].hasOwner() == false){
+	 player.setInJail(true);
 	 return 1;
    }
    //RETURN 1 this means that the user has the option to buy this property
-   if(tiles[player.position].hasOwner() == true){
-
+   if(getCurrTile().getType() == 2 && tiles[player.position].hasOwner() == true){
 	  player.setInJail(true);
      return 2;
    }
