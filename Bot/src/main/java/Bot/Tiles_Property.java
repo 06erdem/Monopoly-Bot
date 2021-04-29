@@ -93,7 +93,10 @@ public class Tiles_Property extends Tiles  {
 		 }
 	 }
 	 else { //Has no owner, can buy or skip
-		 message = "You can buy this property for $" + getValue() + "\nPress 'b' to make the purchase or press 's' to skip."; 
+		 if(p.getInJail() == false)
+			 message = "Press 'd' to roll dice!";
+		 else
+			 message = "You can buy this property for $" + getValue() + "\nPress 'b' to make the purchase or press 's' to skip."; 
 	 }
 	 
  }
