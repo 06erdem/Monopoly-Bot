@@ -25,7 +25,7 @@ import net.dv8tion.jda.api.entities.MessageChannel;
  * Board: 
  *        Update board states and player states
  *        Functions in board when called should only perform its task such as move player, add properties, 
- *                 add/subtract money, all logic whether an action is valid should be done in controller
+ *                 add/subtract money, all logic whether an action is valid should be done in controller.
  * 
  * 
  **/
@@ -77,7 +77,7 @@ public class Game_Control_Center {
 		embed.setFooter(footer); // doesn't need to handle exception since setFooter accepts null
 		channel.sendMessage(embed.build()).queue();
 	}
-	
+
 	public void run(EmbedBuilder embed, MessageChannel channel, String input, String userID) {
 		this.embed = embed;
 		if(this.channel == null)
@@ -122,7 +122,7 @@ public class Game_Control_Center {
 			
 			//Functions for running game
 			else if(input.equals("!start") && gameState == 1) {
-				if(board.numPlayers >= 1) {
+				if(board.numPlayers >= 2) {
 					gameState = 2;
 					printboard();
 				}
@@ -137,6 +137,10 @@ public class Game_Control_Center {
 				board.getPlayer().setMoney(0);
 				sendGenericEmbed("You lost all of your money", "<@"+board.getPlayer().getId()+">",null);
 			}
+			/*else if(input.equals("take my money") && gameState == 2) {
+				board.getPlayer().setMoney(0);
+				sendGenericEmbed("You lost all of your money", "<@"+board.getPlayer().getId()+">",null);
+			}*/
 				
 			//Functions for 
 			else if(gameState == 2 && board.playerList[board.getCurrPlayer()].getId().equals(userID)) {
@@ -146,74 +150,100 @@ public class Game_Control_Center {
 				//moveState = 3 if the user landed on chance
 				//moveState = 4 if the user was sent to jail
 				//moveState = 5 if the user is out of money
-				if(input.equals("d") || input.contains("d ")) { //To roll dice, command instructions will be given in the footer of each print board
+				if((input.equals("d") || input.contains("d ")) && (!(board.getCurrTile().getType() != 3 && board.getPlayer().getInJail() == true) /*|| (board.getCurrTile().getOwner() == board.getCurrPlayer())*/) ) { //To roll dice, command instructions will be given in the footer of each print board
 					Player currentPlayer = board.playerList[board.getCurrPlayer()];
 					int initialPosition = currentPlayer.getPosition();
 					String diceOutput = board.rollDice();
      				String[] dice = diceOutput.split(" ");
      				int dice1 = Integer.parseInt(dice[0]);
      				int dice2 = Integer.parseInt(dice[1]);
-     				String[] spl = {null,null};
+     				
+     				String[] spl = {null,null,null,null};
      				if(input.contains("d ")) {
      					spl = input.split(" ");
-     					if(spl[1] != null) {
+     					if(spl[1] != null && spl[2] != null) {
      						dice1 = Integer.parseInt(spl[1]);
      						dice2 = Integer.parseInt(spl[2]);
      					}
+     					else if(spl[1] != null) {
+     						dice1 = Integer.parseInt(spl[1]);
+     						dice2 = 0;
+     					}
      				}
-					int moveState = board.movePosition(dice1, dice2, board.getCurrPlayer());
+     				embed.setThumbnail("https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/2-Dice-Icon.svg/1200px-2-Dice-Icon.svg.png");
+     				if(board.getPlayer().getInJail() == false) //not in jail
+     					sendGenericEmbed("Dice rolled!","You rolled " + dice1 + " and " + dice2 + "! You moved " + (int)(dice1+dice2) + " spaces.",null);
+     				else
+     					sendGenericEmbed("Dice rolled!","You rolled " + dice1 + " and " + dice2 + "!",null);
+					embed.setThumbnail(null);
 					
-					if(initialPosition > board.getPlayer().getPosition() && dice1 + dice2 + initialPosition != 30)
+ 					int moveState = board.movePosition(dice1, dice2, board.getCurrPlayer());
+ 					
+ 					
+					
+					if(initialPosition > board.getPlayer().getPosition() && dice1 + dice2 + initialPosition != 30) //If past the start, earn money.
 						sendGenericEmbed("Congrats!","You just earned $200 for completing a full tour around the board.", "New bank balance: "+board.getPlayer().getMoney());
 					
-					if(board.getCurrTile().getType() == 0) { //If at 
+					if(board.getCurrTile().getType() == 0) { //If at parking
 						sendGenericEmbed("Free parking!", "<@"+board.getPlayer().getId()+"> You landed on free parking!",null);
 						board.goToNextPlayer();
-						//printboard();
-					}
-					if(board.getCurrTile().getType() == 5) { //landed on tax
 						printboard();
-						board.goToNextPlayer();
+					}
+					else if(moveState == 7 || board.getCurrTile().getType() == 5) { //landed on tax
+						printboard();
+						//board.goToNextPlayer();
 					}
 						
-					if(board.getCurrTile().getType() == 3) { //If the player is in jail
+					else if(dice1 + dice2 + initialPosition == 30 || dice1 + dice2 + initialPosition == 10) { //If the player is in jail
 						((Tiles_Jail)(board.getCurrTile())).adjustMessage(currentPlayer);
+						if(dice1 + dice2 + initialPosition == 30) {//If went to jail through top-right
+							sendGenericEmbed("You are in jail!","<@"+board.getPlayer().getId()+">You have been taken from your current position to jail!",null);
+						}
+						else {
+							sendGenericEmbed("You are in jail!","<@"+board.getPlayer().getId()+"> you are in jail! You are only visiting so no further action is required",null);
+						}
+						
+						board.goToNextPlayer();
+						printboard();
 					}
-					/*if((initialPosition > currentPlayer.getPosition()) && (currentPlayer.getInJail() == false)){
-						//Print passing GO message
-					}*/
-					if(moveState == 1){
+
+					else if(moveState == 1){
 						//Buy property message
 						printboard(); //If it is an un-bought property, offer to buy.
 					}
-					if(moveState == 2){ //If user landed on an owned tile
+					else if(moveState == 2){ //If user landed on an owned tile
 						if(board.getCurrTile().getOwner() != board.getCurrPlayer()) //If the current player is NOT the owner....
 							printboard(); //If the user landed on an owned tile, the program will want another input to buy, rent, etc.
 						else {
 							sendGenericEmbed("You own this tile", "You own this tile and can stay here rent free!", null);
+							board.getPlayer().setInJail(false);
 							board.goToNextPlayer();
+							printboard();
 						}
 					}
-					if(board.getCurrTile().getType() == 4/*moveState == 3*/){ //If the user landed on 'chance'
-						currentPlayer.addMoney(((Tiles_Chance)(board.getCurrTile())).getRandom());
-						sendGenericEmbed("Chance tile!", "<@" + userID + "> " + board.getCurrTile().getMessage(board.getCurrPlayer()), null);
+					else if(board.getCurrTile().getType() == 4 && moveState == 3){ //If the user landed on 'chance'
+						int chance = board.getCurrTile().getRandom();
+						currentPlayer.addMoney(chance);
+						String msg = "You landed on a " + board.getCurrTile().getName() + "\n";
+						if(chance > 0)
+							msg += "You won $" + chance;
+						else if(board.getCurrTile().getRandom() < 0)
+							msg += "Unlucky! You lost $" + -chance;
+						else
+							msg += "You didn't get anything...";
+						sendGenericEmbed("Chance tile!", "<@" + userID + "> " + msg, null);
 						if(currentPlayer.getMoney() < 0)
 							playerLose(board.getCurrPlayer());
 						board.goToNextPlayer();
 						printboard();
 						//Print "Landed on chance" message
 					}
-					if(moveState == 4){
-						//Print "Sent to jail" message
-						sendGenericEmbed("Player " + (int)(board.getCurrPlayer()+1) + " went to jail!", "<@"+board.getPlayer().getId()+"> You were taken to jail!",null);
-						board.goToNextPlayer();
-						printboard();
-					}
-					if(moveState == 5){ //If the player couldn't roll double...
-						if(board.playerList[board.getCurrPlayer()].getNumProperties() == 0 && board.getPlayer().getMoney() < 50){
+
+					else if(moveState == 5){ //If the player couldn't roll double...
+						if(board.playerList[board.getCurrPlayer()].getNumProperties() == 0 && board.getPlayer().getMoney() < 50){ //If player has no money or properties, declares bankruptcy
 							//Declare bankruptcy
 							playerLose(board.getCurrPlayer()); //Player looses
-							sendGenericEmbed(board.getPlayer().getEmoji() + "Player " + (int)(board.getCurrPlayer()+1) + " Lost!", "You could pay bail and had no properties to give.", null);
+							sendGenericEmbed(board.getPlayer().getEmoji() + "Player " + (int)(board.getCurrPlayer()+1) + " Lost!","<@"+board.getPlayer().getId()+">You didn't have enough money to pay bail and had no properties to give.", null);
 							board.goToNextPlayer(); //Goes to next player
 							printboard();
 						}
@@ -229,7 +259,7 @@ public class Game_Control_Center {
 						else { //Has to pay bail.
 							board.getPlayer().payJail();
 							sendGenericEmbed(board.getPlayer().getEmoji() + "Paid Bail!",
-									"Paid $" + ((Tiles_Jail)(board.getCurrTile())).getValue() + "worth of bail to get out of jail.", "New bank balance: $" + 
+									"Paid $50 worth of bail to get out of jail.", "New bank balance: $" + 
 							board.getPlayer().getMoney());
 							board.goToNextPlayer();
 							printboard();
@@ -237,34 +267,35 @@ public class Game_Control_Center {
 						}
 							
 					}
-					if(moveState == 6) {
+					else if(moveState == 6) { //rolled double
+						sendGenericEmbed("Congrats! You rolled double!", "<@"+board.getPlayer().getId()+"> you will be free to leave when it's your turn again.",null);
 						board.goToNextPlayer();
 						printboard();
 					}
-					if(board.tiles[0].name == "You are at the start!")
+					else if(board.tiles[0].name == "You are at the start!")
 						changeStart();
-					
+					else
+						sendGenericEmbed("You messed up mate","Error code 12345678. Contact admin",null);
 				}
-				if(input.equals("b") && board.getCurrTile().getType() == 2 && !board.getCurrTile().hasOwner()) { //To buy property, checks if property and if has owner
+				if(input.equals("b") && board.getCurrTile().getType() == 2 && !board.getCurrTile().hasOwner() && board.getPlayer().getInJail()==true) { //To buy property, checks if property and if has owner
+					
 					if(board.getPlayer().getMoney() >= board.getCurrTile().getValue()) { //If the player has enough money
 						board.getPlayer().buyProperty((Tiles_Property)board.getCurrTile(), board.getCurrPlayer());
 						sendGenericEmbed(board.getPlayer().getEmoji() + "Bought " + board.getCurrTile().getName() + board.getCurrTile().getEmoji(),
 								"Congrats! You just bought this property for " + board.getCurrTile().getValue(), "New bank balance: $"+board.getPlayer().getMoney());
-						board.goToNextPlayer();
-						printboard();
-						
 					}
-					if(board.getPlayer().getMoney() <= board.getCurrTile().getValue()) { //If the player doesn't have enough money, goes BANKRUPT
-						sendGenericEmbed(board.getPlayer().getEmoji() + "Game over Player " + (int)(board.getCurrPlayer()+1) + "!",
-								"You are bankrupt! You are now out of the game!", null);
-						playerLose(board.getCurrPlayer()); //This will automatically end the game if there are no players left
-						board.goToNextPlayer();
-						printboard();
+					else if(board.getPlayer().getMoney() < board.getCurrTile().getValue()) {
+						sendGenericEmbed("You don't have enough money.","<@"+board.getPlayer().getId()+"> You will be forced to skip.",null);
 					}
+					
+					board.getPlayer().setInJail(false);
+					board.goToNextPlayer();
+					printboard();
+					
 				}
 				if(input.equals("s") && board.getCurrTile().getType() == 2 && !board.getCurrTile().hasOwner()) { //To skip property, checks if property and if has owner
-					board.getPlayer().setSkipped(1);
-					board.goToNextPlayer(); //TODO need to fix moving to tile
+					board.getPlayer().setInJail(false);
+					board.goToNextPlayer();
 					printboard();
 				}
 				if(input.equals("r") && board.getCurrTile().getType() == 2 && board.getCurrTile().getOwner() != board.getCurrPlayer()) { //To rent, checks if property and isn't owner
@@ -295,7 +326,7 @@ public class Game_Control_Center {
 						board.goToNextPlayer();
 						printboard();
 					}
-					if(board.getPlayer().getMoney() <= ((Tiles_Tax)(board.getCurrTile())).getTax()) { //If the player doesn't have enough money, goes BANKRUPT
+					if(board.getCurrTile().getType() == 5 && board.getPlayer().getMoney() <= ((Tiles_Tax)(board.getCurrTile())).getTax()) { //If the player doesn't have enough money, goes BANKRUPT
 						sendGenericEmbed(board.getPlayer().getEmoji() + "Game over Player " + (int)(board.getCurrPlayer()+1) + "!",
 								"You are bankrupt! You are now out of the game!", null);
 						playerLose(board.getCurrPlayer()); //This will automatically end the game if there are no players left
@@ -323,7 +354,7 @@ public class Game_Control_Center {
 					sendGenericEmbed(board.getPlayer().getEmoji() + "Player " + (int)(board.getCurrPlayer()+1) + " declared bankrupcy!", "<@" + board.getPlayer().getId() + "> you are out of the game!", null);
 					playerLose(board.getCurrPlayer());
 					board.goToNextPlayer();
-					board.printBoard();
+					printboard();
 				}
 				
 			}
@@ -386,14 +417,10 @@ public class Game_Control_Center {
 				playerPositions[i] = board.playerList[i].getPosition();
 		String strBoard =  board.printBoard(playerPositions[0],playerPositions[1],playerPositions[2],playerPositions[3]);
 
-		if(board.getPlayer(). getSkipped() == 1){
-			message = "Press 'd' to roll dice!";
-			board.getPlayer().setSkipped(0);
-		}
-		else{
-			message = (board.tiles[board.playerList[board.getCurrPlayer()].getPosition()]).getMessage(board.currPlayer);
-		}
-		sendGenericEmbed(board.playerList[board.getCurrPlayer()].getEmoji() + " Player " + (int)(board.getCurrPlayer() +1) + "'s Turn!\n" + ":moneybag:Money: " + board.playerList[board.getCurrPlayer()].getMoney(),
+
+		message = (board.tiles[board.playerList[board.getCurrPlayer()].getPosition()]).getMessage(board.currPlayer);
+
+		sendGenericEmbed(board.playerList[board.getCurrPlayer()].getEmoji() + " Player " + (int)(board.getCurrPlayer() +1) + "'s Turn!\n" + ":moneybag:Money: " + board.playerList[board.getCurrPlayer()].getMoney() + "\n"+board.getCurrTile().getEmoji() + board.getCurrTile().getName(),
 				"<@"+board.getPlayer().getId() + ">\n" + strBoard, message);
 	}
 	public void joinReceiver(String input, String userID) {
@@ -462,7 +489,7 @@ public class Game_Control_Center {
 		String ret = "";
 		for(Player p: board.getPlayerList())
 			if(p != null)
-				ret += p.getEmoji() + " ID: " + p.getId() + "\nPosition: " + p.getPosition();
+				ret += p.getEmoji() + " <@" + p.getId() + ">\nPosition: " + p.getPosition();
 		sendGenericEmbed("Showing Players:",ret,null);
 	}
 }
