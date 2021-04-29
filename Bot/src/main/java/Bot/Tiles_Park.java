@@ -20,7 +20,6 @@ public class Tiles_Park extends Tiles {
 	}
 
 	public int getOwner() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 	@Override
